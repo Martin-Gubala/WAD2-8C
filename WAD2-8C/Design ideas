@@ -1,0 +1,41 @@
+Cafe review sytesm
+
+users
+-cafe owner(sets up cafe at account setup)
+-Personal(can leave 1 written review per cafe, 1 rating per drink)
+
+Cafe
+-many drinks on menu
+-each drink has average rating
+-cafe has oerall written reviews
+
+interface
+login-
+  -personal
+  -buisness
+
+homepage-
+  -top cafes/drinks
+  -search(top bar)
+  -add review
+  -account(top right righmost)
+  -log in/ out(top right)
+  -sign up(left of login)
+  -footer(contact us)
+
+signup-
+  -user
+  -buisness
+
+Add review
+  -written review
+  -per drink rating 
+
+
+er diagram-
+-user table(1 cafe 1 buisness user)
+-cafe table(1 cafe many items)
+-items(many items per cafe)
+-reviews(1 personal user per cafe review)
+
+
