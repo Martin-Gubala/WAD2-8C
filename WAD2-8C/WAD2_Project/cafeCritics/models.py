@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-class Cafe (models.Model):
+class Cafe(models.Model):
     name = models.CharField(max_length=20)
     location = models.CharField(max_length=20)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cafes")
@@ -19,8 +19,7 @@ class Cafe (models.Model):
 
     def __str__(self):
         return self.name
-    
-    
+
 class Drink(models.Model):
     name = models.CharField(max_length=20)
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -29,7 +28,6 @@ class Drink(models.Model):
 
     def __str__(self):
         return self.name
-    
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
@@ -39,6 +37,6 @@ class Review(models.Model):
 
     class Meta:
         unique_together = ('user', 'cafe')
-    
+
     def __str__(self):
         return f"Review by {self.user.username} for {self.cafe.name}"

@@ -1,0 +1,9 @@
+{% extends 'registration/base_generic.html' %}
+{% block content %}
+<h2>Set Up Your Cafe</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- Add fields for cafe setup here -->
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
