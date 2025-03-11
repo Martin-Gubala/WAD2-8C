@@ -1,0 +1,33 @@
+{% extends 'registration/base_generic.html' %}
+
+{% block content %}
+    <h1>{{ cafe.name }}</h1>
+    <div>
+        <ul>
+            <li>Location - {{ cafe.location }}</li>
+            <li>Owner - {{ cafe.owner }}</li>
+            <li>Average Rating - {{ cafe.average_rating }}</li>
+        </ul>
+    </div>
+
+    <div>
+        {% if drinks %}
+            {% for drink in drinks %}
+            <div>                   
+                <ul>
+                    <li>Name - {{ drink.name }}</li>
+                    <li>Price - {{ drink.price }}</li>
+                    <li>Rating - {{ drink.rating }}</li>
+                </ul>
+            </div>
+            {% endfor %}
+        {% else %}
+            <strong>There are no drinks present.</strong>
+        {% endif %}
+        </div>
+
+    <div>
+        <a href="{% url 'cafeCritics:review' %}">Add a Review</a>
+    </div>
+    <a href="{% url 'cafeCritics:cafes' %}">View All Cafes</a>
+{% endblock %}

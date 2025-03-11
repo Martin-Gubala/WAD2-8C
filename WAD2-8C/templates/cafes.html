@@ -1,0 +1,22 @@
+{% extends 'registration/base_generic.html' %}
+
+{% block content %}
+    <h1>Cafes</h1>
+
+    <div>
+    {% if cafes %}
+        {% for cafe in cafes %}
+        <div>                   
+            <h2><a href="{% url 'cafe' cafe.id %}">{{ cafe.name }}</a></h2>
+            <ul>
+                <li>Location - {{ cafe.location }}</li>
+                <li>Owner - {{ cafe.owner }}</li>
+                <li>Average Rating - {{ cafe.average_rating }}</li>
+            </ul>
+        </div>
+        {% endfor %}
+    {% else %}
+        <strong>There are no cafes present.</strong>
+    {% endif %}
+    </div>
+{% endblock %}
