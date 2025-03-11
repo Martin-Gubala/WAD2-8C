@@ -15,6 +15,7 @@ class Cafe (models.Model):
     location = models.CharField(max_length=20)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cafes")
     average_rating = models.IntegerField()
+    #url = models.URLField(); need to add to database
 
     def __str__(self):
         return self.name
