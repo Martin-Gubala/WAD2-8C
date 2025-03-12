@@ -15,10 +15,14 @@ def signup_view(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            context_dict = {
+                'top_cafes': Cafe.objects.order_by('-average_rating')[:5],
+                'top_drinks': Drink.objects.order_by('-rating')[:5]
+            }
             return render(request, 'registration/home.html', context=context_dict)
     else:
         form = UserRegistrationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form, 'show_search': False})
 
 def login_view(request):
     if request.method == 'POST':
@@ -29,17 +33,17 @@ def login_view(request):
             return redirect('home')
     else:
         form = UserLoginForm()
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form, 'show_search': False})
 
 def home_view(request):
     cafe_list = Cafe.objects.order_by('-average_rating')[:5]
     drink_list = Drink.objects.order_by('-rating')[:5]
 
-    context_dict = {}
-    context_dict['cafes'] = cafe_list
-    context_dict['drinks'] = drink_list
-
-    return render(request, 'registration/home.html', context=context_dict)
+    return render(request, 'registration/home.html', {
+        'top_cafes': cafe_list,
+        'top_drinks': drink_list,
+        'show_search': True
+    })
 
 def cafes_view(request):
     cafe_list = Cafe.objects
@@ -54,7 +58,7 @@ def about_view(request):
     return render(request, 'about.html')
 
 def account_settings_view(request):
-    return render(request, 'account_settings.html')
+    return render(request, 'account_settings.html', {'show_search': False})
 
 def show_cafe(request, cafe_name_slug):
     context_dict = {}
@@ -83,3 +87,9 @@ def cafe_setup_view(request):
     else:
         form = CafeSetupForm()
     return render(request, 'registration/cafe_setup.html', {'form': form})
+
+
+def search_results(request):
+    query = request.GET.get('q', '')
+    results = Cafe.objects.filter(name__icontains=query) if query else None
+    return render(request, 'search_results.html', {'query':query, 'results': results})

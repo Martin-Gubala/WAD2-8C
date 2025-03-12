@@ -1,5 +1,54 @@
-{% extends 'registration/base_generic.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Cafe Critics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="{% url 'cafeCritics:home_page' %}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'cafeCritics:about' %}">About</a>
+                        <a class="nav-link" href="{% url 'cafeCritics:signup' %}">Sign Up</a>
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-link" href="{% url 'cafeCritics:account_settings' %}">Account Settings</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-{% block content %}
-    <h2>About</h2>
-{% endblock %}
+    <main class="container mt-5">
+        <h1 class="text-center mb-4">About Cafe Critics</h1>
+        <p>Welcome to Cafe Critics! We’re excited to be your go-to guide for everything café-related. Whether you’re on the hunt for the perfect place to enjoy a latte while getting some work done or a cozy spot to sip a cappuccino with a friend, we’re here to help you find your next favorite hangout!</p>
+        <h2>Our Mission</h2>
+        <p>Our mission is to connect coffee lovers with the best cafes in town. We believe each cafe has its own story and unique flavors worth discovering. That’s why we review cafes to help you enjoy authentic and delightful experiences.</p>
+        <h2>What We Do</h2>
+        <p>Cafe Critics is your go-to guide for discovering amazing cafes, complete with honest reviews and fresh feedback from fellow coffee lovers. We love exploring everything from cozy hidden gems to lively hotspots, so we can share with you the best-rated cafes and their delicious drinks. Our platform makes it easy for you to find your next favorite coffee spot:</p>
+        <ul>
+            <li>Discover new cafes tailored to your taste and location.</li>
+            <li>Rate and review your experiences to help fellow coffee lovers.</li>
+            <li>Learn about coffee trends and the stories behind each cafe.</li>
+        </ul>
+        <h2>Join Our Community</h2>
+        <p>Become part of a friendly community that shares your love for coffee! Sign up to swap stories, find new hangouts, and keep in touch with all the latest cafe happenings.</p>
+        <p>Whether you’re just stopping by or you’re a true coffee lover, Cafe Critics is here to be your buddy in the amazing world of cafes. Let’s have fun discovering and enjoying the best coffee experiences together!</p>
+        <h2>Contact Us</h2>
+        <p>Got suggestions or need to get in touch? We'd love to hear from you! Connect with us at <a href="mailto:contact@cafecritics.com">contact@cafecritics.com</a> or follow us on our social media pages to stay updated.</p>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>© 2025 CafeCritics</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

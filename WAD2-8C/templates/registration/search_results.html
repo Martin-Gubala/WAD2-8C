@@ -1,0 +1,20 @@
+{% extends "registration/base_generic.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+    <h2>Search Results</h2>
+    {% if query %}
+        <p>Results for: <strong>{{ query }}</strong></p>
+    {% endif %}
+
+    {% if results %}
+        <ul>
+            {% for cafe in results %}
+                <li><a href="{% url 'cafeCritics:cafe_detail' cafe.id %}">{{ cafe.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No cafes found matching your search.</p>
+    {% endif %}
+{% endblock %}

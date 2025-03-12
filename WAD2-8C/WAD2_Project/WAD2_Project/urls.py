@@ -21,7 +21,7 @@ from cafeCritics.views import home_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('', include('cafeCritics.urls')),  
+    path('', include('cafeCritics.urls', namespace='cafeCritics')),  
     path('home/', home_view, name='home_page'),  
     path('users/', include('cafeCritics.urls', namespace='cafeCritics')),
 ]
