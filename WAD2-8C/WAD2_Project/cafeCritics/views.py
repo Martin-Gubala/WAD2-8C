@@ -47,7 +47,7 @@ def cafes_view(request):
     context_dict = {}
     context_dict['cafes'] = cafe_list
 
-    response = render(request, 'cafes.html')
+    response = render(request, 'cafes.html', context=context_dict)
     return response
 
 def about_view(request):
@@ -56,15 +56,18 @@ def about_view(request):
 def account_settings_view(request):
     return render(request, 'account_settings.html')
 
-def cafe_view(request, cafe_id):
-    cafe = get_object_or_404(Cafe, id=cafe_id)
-    drink_list = Drink.objects
-
+def show_cafe(request, cafe_name_slug):
     context_dict = {}
-    context_dict['cafe'] = cafe
-    context_dict['drinks'] = drink_list
+    try:
+        cafe = Cafe.objects.get(slug=cafe_name_slug)
+        drinks = Drink.objects.filter(cafe=cafe)
+        context_dict['drinks'] = drinks
+        context_dict['cafe'] = cafe
+    except:
+        context_dict['cafe'] = None
+        context_dict['drinks'] = None
 
-    return render(request, 'cafe.html', context_dict)
+    return render(request, 'cafe.html', context=context_dict)
 
 def review_view(request):
     return render(request, 'review.html')

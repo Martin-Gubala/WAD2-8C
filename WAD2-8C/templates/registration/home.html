@@ -10,7 +10,7 @@
         <ul>
             {% for cafe in cafes %}
             <li>
-                <a href="{% url 'cafe' cafe.id %}">{{ cafe.name }}</a>
+                <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a>
             </li>
             {% endfor %}
         </ul>
