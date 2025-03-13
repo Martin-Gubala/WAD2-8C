@@ -46,7 +46,7 @@ def home_view(request):
     })
 
 def cafes_view(request):
-    cafe_list = Cafe.objects
+    cafe_list = Cafe.objects.all()
     
     context_dict = {}
     context_dict['cafes'] = cafe_list
