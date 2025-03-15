@@ -10,9 +10,10 @@ urlpatterns = [
     path('search/', views.search_results, name='search'),
     path('about/', views.about_view, name='about'),
     path('accountsettings/', views.account_settings_view, name='account_settings'),
-    path('cafes/<int:cafe_id>/', views.show_cafe, name='cafe'),
+    path('cafes/<slug:cafe_name_slug>/', views.show_cafe, name='show_cafe'),  # Corrected URL pattern
     path('cafes/<int:cafe_id>/review', views.review_view, name='review'),
     path('signup/', views.signup_view, name='signup'),
     path('login/', login_view, name='login'),
     path('cafe_setup/', cafe_setup_view, name='cafe_setup'),
+    path('profile/<str:username>/', views.profile_view, name='profile'),  # Added URL pattern for profile view
 ]

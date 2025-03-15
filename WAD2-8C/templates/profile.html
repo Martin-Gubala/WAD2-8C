@@ -1,0 +1,32 @@
+{% extends 'registration/base_generic.html' %}
+
+{% block content %}
+    <h1>{{ user_profile.user.username }}'s Profile</h1>
+    <p>User Type: {{ user_profile.get_user_type_display }}</p>
+
+    {% if user_profile.user_type == 'business' %}
+        <h2>Owned Cafes</h2>
+        {% if cafes %}
+            <ul>
+                {% for cafe in cafes %}
+                    <li><a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No cafes owned.</p>
+        {% endif %}
+    {% elif user_profile.user_type == 'personal' %}
+        <h2>Reviews</h2>
+        {% if reviews %}
+            <ul>
+                {% for review in reviews %}
+                    <li>
+                        <strong>{{ review.cafe.name }}</strong>: {{ review.text }} (Rating: {{ review.rating }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews written.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

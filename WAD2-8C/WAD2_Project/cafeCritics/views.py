@@ -67,7 +67,7 @@ def show_cafe(request, cafe_name_slug):
         drinks = Drink.objects.filter(cafe=cafe)
         context_dict['drinks'] = drinks
         context_dict['cafe'] = cafe
-    except:
+    except Cafe.DoesNotExist:
         context_dict['cafe'] = None
         context_dict['drinks'] = None
 
@@ -88,8 +88,20 @@ def cafe_setup_view(request):
         form = CafeSetupForm()
     return render(request, 'registration/cafe_setup.html', {'form': form})
 
-
 def search_results(request):
     query = request.GET.get('q', '')
     results = Cafe.objects.filter(name__icontains=query) if query else None
     return render(request, 'search_results.html', {'query':query, 'results': results})
+
+def profile_view(request, username):
+    user = get_object_or_404(User, username=username)
+    user_profile = get_object_or_404(UserProfile, user=user)
+    cafes = Cafe.objects.filter(owner=user) if user_profile.user_type == 'business' else None
+    reviews = Review.objects.filter(user=user) if user_profile.user_type == 'personal' else None
+
+    context = {
+        'user_profile': user_profile,
+        'cafes': cafes,
+        'reviews': reviews,
+    }
+    return render(request, 'profile.html', context)
