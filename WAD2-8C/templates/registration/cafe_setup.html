@@ -1,9 +1,36 @@
 {% extends 'registration/base_generic.html' %}
 {% block content %}
 <h2>Set Up Your Cafe</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <!-- Add fields for cafe setup here -->
+    {{ form.as_p }}
+    <div>
+        <label for="cafe-description">Cafe Description:</label>
+        <textarea name="cafe-description" id="cafe-description"></textarea>
+    </div>
+    <div>
+        <label for="cafe-photo">Cafe Photo:</label>
+        <input type="file" name="cafe-photo" id="cafe-photo">
+    </div>
+    <div id="drinks-container">
+        <h3>Drinks</h3>
+        <button type="button" id="add-drink">Add Drink</button>
+    </div>
     <button type="submit">Submit</button>
 </form>
+<script>
+    document.getElementById('add-drink').addEventListener('click', function() {
+        const container = document.getElementById('drinks-container');
+        const index = container.children.length - 1;
+        const drinkForm = `
+            <div class="drink-form">
+                <label for="drinks-${index}-name">Drink Name:</label>
+                <input type="text" name="drinks-${index}-name" id="drinks-${index}-name">
+                <label for="drinks-${index}-photo">Drink Photo:</label>
+                <input type="file" name="drinks-${index}-photo" id="drinks-${index}-photo">
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', drinkForm);
+    });
+</script>
 {% endblock %}
