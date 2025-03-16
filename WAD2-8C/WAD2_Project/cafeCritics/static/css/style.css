@@ -1,0 +1,23 @@
+/* Make sure the page fills the full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make main take up available space */
+main {
+    flex: 1;
+}
+
+/* Properly styled footer at the bottom */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px 15px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}

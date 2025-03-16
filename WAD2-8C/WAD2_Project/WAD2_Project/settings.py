@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'cafeCritics',
 ]
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'WAD2_Project/cafeCritics/static'),
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
