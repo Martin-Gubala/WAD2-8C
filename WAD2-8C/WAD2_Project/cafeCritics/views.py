@@ -7,6 +7,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserUpdateForm
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -39,6 +40,10 @@ def login_view(request):
     else:
         form = UserLoginForm()
     return render(request, 'registration/login.html', {'form': form, 'show_search': False})
+
+def logout_view(request):
+    logout(request) 
+    return redirect('cafeCritics:home_page') 
 
 def home_view(request):
     cafe_list = Cafe.objects.order_by('-average_rating')[:5]

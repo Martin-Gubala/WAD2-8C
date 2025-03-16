@@ -43,8 +43,13 @@
                     <div class="navbar-nav ms-auto">
                         <a class="nav-link active" href="{% url 'cafeCritics:home_page' %}">Home</a>
                         <a class="nav-link" href="{% url 'cafeCritics:about' %}">About</a>
-                        <a class="nav-link" href="{% url 'cafeCritics:signup' %}">Sign Up</a>
-                        <a class="nav-link" href="{% url 'cafeCritics:login' %}">Login</a>
+                        {% if user.is_authenticated %}
+                            <span class="nav-link">logged in as {{ user.username }}</span>
+                            <a class="nav-link" href="{% url 'cafeCritics:logout' %}">Logout</a>
+                        {% else %}
+                            <a class="nav-link" href="{% url 'cafeCritics:signup' %}">Sign Up</a>
+                            <a class="nav-link" href="{% url 'cafeCritics:login' %}">Login</a>
+                        {% endif %}
                         <a class="nav-link" href="{% url 'cafeCritics:account_settings' %}">Account Settings</a>
                     </div>
                 </div>

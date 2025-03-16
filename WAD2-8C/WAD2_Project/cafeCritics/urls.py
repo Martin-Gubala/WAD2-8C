@@ -15,5 +15,6 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('login/', login_view, name='login'),
     path('cafe_setup/', cafe_setup_view, name='cafe_setup'),
+    path('logout/', views.logout_view, name='logout'),
     path('profile/<str:username>/', views.profile_view, name='profile'),  # Added URL pattern for profile view
 ]
