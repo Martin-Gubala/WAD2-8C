@@ -1,23 +1,113 @@
-/* Make sure the page fills the full height */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
-/* Make main take up available space */
-main {
-    flex: 1;
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Properly styled footer at the bottom */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
 footer {
     background-color: #343a40;
     color: white;
     text-align: center;
-    padding: 10px 15px;
+    padding: 15px 0;
     width: 100%;
-    position: relative;
+    position: fixed;
     bottom: 0;
+}
+
+.card {
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.list-group-item {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+
+.login-form, .signup-form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label, .signup-form label {
+    font-weight: bold;
+}
+
+.login-form input, .signup-form input {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.hero {
+    background: url("/static/images/coffee-hero.jpeg") no-repeat center center;
+    background-size: cover;
+    height: 60vh;
+    position: relative;
+}
+
+.hero-content {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p.lead {
+    font-size: 1.2rem;
+}
+
+.bi {
+    font-size: 1.3rem;
+    margin-right: 5px;
 }
