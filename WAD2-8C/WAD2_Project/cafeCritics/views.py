@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .models import Cafe, Drink, UserProfile
 from .forms import UserRegistrationForm, UserLoginForm, CafeSetupForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import UserUpdateForm
 
 # Create your views here.
 
@@ -105,3 +110,36 @@ def profile_view(request, username):
         'reviews': reviews,
     }
     return render(request, 'profile.html', context)
+
+
+@login_required
+def account_settings_view(request):
+    user = request.user
+
+    #User update form
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=user)
+        password_form = PasswordChangeForm(user, request.POST)
+
+        if 'update_user' in request.POST:  
+            if user_form.is_valid():
+                user_form.save()
+                messages.success(request, "Your account details have been updated.")
+                return redirect('cafeCritics:account_settings')
+
+        elif 'change_password' in request.POST:  
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)  
+                messages.success(request, "Your password has been updated.")
+                return redirect('cafeCritics:account_settings')
+
+    else:
+        user_form = UserUpdateForm(instance=user)
+        password_form = PasswordChangeForm(user)
+
+    return render(request, 'account_settings.html', {
+        'user_form': user_form,
+        'password_form': password_form,
+        'show_search': False
+    })

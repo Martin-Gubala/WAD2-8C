@@ -1,5 +1,35 @@
 {% extends 'registration/base_generic.html' %}
 
+{% block title %}Account Settings{% endblock %}
+
 {% block content %}
+<div class="container mt-4">
     <h2>Account Settings</h2>
+    
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend>Update Account Information</legend>
+            {{ user_form.as_p }}
+        </fieldset>
+        <button type="submit" name="update_user" class="btn btn-primary">Update Info</button>
+    </form>
+
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend>Change Password</legend>
+            {{ password_form.as_p }}
+        </fieldset>
+        <button type="submit" name="change_password" class="btn btn-warning">Change Password</button>
+    </form>
+</div>
 {% endblock %}

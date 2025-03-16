@@ -21,6 +21,14 @@ class UserRegistrationForm(UserCreationForm):
             user.save()
             UserProfile.objects.create(user=user, user_type=self.cleaned_data['user_type'])
         return user
+    
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField(required=True, label="Change Email")
+    username = forms.CharField(required=True, label="Change Username")
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'autofocus': True}))
