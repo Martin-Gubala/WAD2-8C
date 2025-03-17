@@ -27,7 +27,7 @@
         </div>
 
     <div>
-        <a href="{% url 'cafeCritics:review' %}">Add a Review</a>
+        <a href="{% url 'cafeCritics:review' cafe.slug %}">Add a Review</a>
     </div>
     <a href="{% url 'cafeCritics:cafes' %}">View All Cafes</a>
 {% endblock %}

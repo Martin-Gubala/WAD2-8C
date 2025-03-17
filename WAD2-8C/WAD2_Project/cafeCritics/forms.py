@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import UserProfile, Cafe
+from .models import Review, UserProfile, Cafe
 
 class UserRegistrationForm(UserCreationForm):
     USER_TYPE_CHOICES = (
@@ -38,3 +38,8 @@ class CafeSetupForm(forms.ModelForm):
     class Meta:
         model = Cafe
         fields = ['name', 'location']
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'text']

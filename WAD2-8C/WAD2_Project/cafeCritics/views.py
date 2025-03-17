@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
-from .models import Cafe, Drink, UserProfile
-from .forms import UserRegistrationForm, UserLoginForm, CafeSetupForm
+from .models import Cafe, Drink, Review, UserProfile
+from .forms import ReviewForm, UserRegistrationForm, UserLoginForm, CafeSetupForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -83,8 +83,19 @@ def show_cafe(request, cafe_name_slug):
 
     return render(request, 'cafe.html', context=context_dict)
 
-def review_view(request):
-    return render(request, 'review.html')
+def review_view(request, cafe_name_slug):
+    cafe = get_object_or_404(Cafe, slug=cafe_name_slug)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.cafe = cafe
+            review.save()
+            return redirect('cafeCritics:show_cafe', cafe_name_slug=cafe_name_slug)
+    else:
+        form = ReviewForm()
+    return render(request, 'review.html', {'form': form, 'cafe': cafe})
 
 def cafe_setup_view(request):
     if request.method == 'POST':
