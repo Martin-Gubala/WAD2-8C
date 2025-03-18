@@ -1,34 +1,48 @@
 {% extends 'registration/base_generic.html' %}
 
 {% block content %}
-    <h1>{{ cafe.name }}</h1>
-    <div>
-        <ul>
-            <li>Location - {{ cafe.location }}</li>
-            <li>Owner - {{ cafe.owner }}</li>
-            <li>Average Rating - {{ cafe.average_rating }}</li>
-        </ul>
-    </div>
 
-    <div>
-        <h2>Drinks Menu</h2>
-        {% if drinks %}
-            {% for drink in drinks %}
-            <div>                   
-                <ul>
-                    <li>Name - {{ drink.name }}</li>
-                    <li>Price - {{ drink.price }}</li>
-                    <li>Rating - {{ drink.rating }}</li>
+    <head>
+        <script type="text/javascript">
+            var drinksurl = "{% url 'cafeCritics:show_drinks' cafe.slug %}";
+            var cafeurl = "{% url 'cafeCritics:show_cafeAJAX' cafe.slug %}";
+            function loadDoc(url, cFunction) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        cFunction(this)
+                        document.getElementById("menu").innerHTML = this.responseText;
+                    }
+                };
+                // xhttp.open("GET", "{% url 'cafeCritics:show_drinks' cafe.slug %}", true);
+                xhttp.open("GET", url, true);
+                xhttp.send();
+            }
+
+            function myFn1(xhttp) {
+                document.getElementById("menu").innerHTML = xhttp.responseText;
+            }
+
+            function myFn2(xhttp) {
+                document.getElementById("cafe").innerHTML = xhttp.responseText; }
+        </script>
+    </head>
+
+    <body>
+        <div id="menu">
+            <h1>{{ cafe.name }}</h1>
+            <div>
+                    <ul>
+                    <li>Location - {{ cafe.location }}</li>
+                    <li>Owner - {{ cafe.owner }}</li>
+                    <li>Average Rating - {{ cafe.average_rating }}</li>
                 </ul>
             </div>
-            {% endfor %}
-        {% else %}
-            <strong>There are no drinks present.</strong>
-        {% endif %}
+            <button type="button"  onclick="loadDoc(drinksurl, myFn1)">See Drinks</button>
         </div>
-
-    <div>
-        <a href="{% url 'cafeCritics:review' cafe.slug %}">Add a Review</a>
-    </div>
-    <a href="{% url 'cafeCritics:cafes' %}">View All Cafes</a>
+        <div>
+            <a href="{% url 'cafeCritics:review' cafe.slug %}">Add a Review</a>
+        </div>
+        <a href="{% url 'cafeCritics:cafes' %}">View All Cafes</a>
+    </body>
 {% endblock %}
