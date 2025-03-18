@@ -111,3 +111,17 @@ h1, h2, h3 {
     font-size: 1.3rem;
     margin-right: 5px;
 }
+
+.card {
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px; 
+}

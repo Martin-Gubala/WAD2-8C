@@ -1,22 +1,27 @@
 {% extends 'registration/base_generic.html' %}
+{% block title %}All Cafes - Cafe Critics{% endblock %}
 
 {% block content %}
-    <h1>Cafes</h1>
-
-    <div>
-    {% if cafes %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">All Cafes</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for cafe in cafes %}
-        <div>                   
-            <h2><a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a></h2>
-            <ul>
-                <li>Location - {{ cafe.location }}</li>
-                <li>Owner - {{ cafe.owner }}</li>
-                <li>Average Rating - {{ cafe.average_rating }}</li>
-            </ul>
+        <div class="col">
+            <div class="card h-100">
+                {% if cafe.photo %}
+                <img src="{{ cafe.photo.url }}" class="card-img-top" alt="{{ cafe.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ cafe.name }}</h5>
+                    <p class="card-text">
+                        Location: {{ cafe.location }}<br>
+                        Owner: {{ cafe.owner }}<br>
+                        Average Rating: {{ cafe.average_rating }}<br>
+                    </p>
+                    <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="btn btn-primary">View Cafe</a>                </div>
+            </div>
         </div>
         {% endfor %}
-    {% else %}
-        <strong>There are no cafes present.</strong>
-    {% endif %}
     </div>
+</div>
 {% endblock %}
