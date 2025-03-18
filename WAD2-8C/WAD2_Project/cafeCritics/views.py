@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .models import Cafe, Drink, Review, UserProfile
-from .forms import ReviewForm, UserRegistrationForm, UserLoginForm, CafeSetupForm
+from .forms import EditCafeForm, ReviewForm, UserRegistrationForm, UserLoginForm, CafeSetupForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -159,3 +159,22 @@ def account_settings_view(request):
         'password_form': password_form,
         'show_search': False
     })
+
+@login_required
+def edit_cafe_view(request, cafe_name_slug):
+    cafe = get_object_or_404(Cafe, slug=cafe_name_slug)
+    if cafe.owner != request.user:
+        return render(request, 'access_denied.html')
+    
+    if request.method == 'POST':
+        form = CafeSetupForm(request.POST, instance=cafe)
+        if form.is_valid():
+            form.save()
+            messages.succes(request, "Your cafe details have been updated.")
+            return redirect('cafeCritics:show_cafe', cafe_name_slug=cafe_name_slug)
+        else:
+            form = EditCafeForm(instance=cafe)
+        return render(request, 'edit_cafe.html', {'form': form, 'cafe': cafe})
+    
+def access_denied_view(request):
+    return render(request, 'access_denied.html')

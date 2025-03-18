@@ -43,3 +43,8 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'text']
+
+class EditCafeForm(forms.ModelForm):
+    class Meta:
+        model = Cafe
+        fields = ['name', 'location']

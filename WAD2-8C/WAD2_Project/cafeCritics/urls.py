@@ -17,4 +17,6 @@ urlpatterns = [
     path('cafe_setup/', cafe_setup_view, name='cafe_setup'),
     path('logout/', views.logout_view, name='logout'),
     path('profile/<str:username>/', views.profile_view, name='profile'),  # Added URL pattern for profile view
+    path('cafe/<slug:cafe_name_slug>/edit/', views.edit_cafe_view, name='edit_cafe'),
+    path('access_denied/', views.access_denied_view, name='access_denied'),
 ]
