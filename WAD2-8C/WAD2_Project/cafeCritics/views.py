@@ -189,9 +189,6 @@ def account_settings_view(request):
 @login_required
 def edit_cafe_view(request, cafe_name_slug):
     cafe = get_object_or_404(Cafe, slug=cafe_name_slug)
-    if cafe.owner != request.user:
-        return render(request, 'access_denied.html')
-    
     if request.method == 'POST':
         form = CafeSetupForm(request.POST, instance=cafe)
         if form.is_valid():
@@ -201,6 +198,3 @@ def edit_cafe_view(request, cafe_name_slug):
         else:
             form = EditCafeForm(instance=cafe)
         return render(request, 'edit_cafe.html', {'form': form, 'cafe': cafe})
-    
-def access_denied_view(request):
-    return render(request, 'access_denied.html')
