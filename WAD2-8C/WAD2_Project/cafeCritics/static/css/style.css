@@ -125,3 +125,12 @@ h1, h2, h3 {
     object-fit: cover;
     height: 200px; 
 }
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+}
+
+.card-header {
+    font-weight: bold;
+}

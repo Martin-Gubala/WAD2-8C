@@ -1,48 +1,47 @@
 {% extends 'registration/base_generic.html' %}
-
+{% block title %}{{ cafe.name }} - Cafe Critics{% endblock %}
 {% block content %}
-
-    <head>
-        <script type="text/javascript">
-            var drinksurl = "{% url 'cafeCritics:show_drinks' cafe.slug %}";
-            var cafeurl = "{% url 'cafeCritics:show_cafeAJAX' cafe.slug %}";
-            function loadDoc(url, cFunction) {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        cFunction(this)
-                        document.getElementById("menu").innerHTML = this.responseText;
-                    }
-                };
-                // xhttp.open("GET", "{% url 'cafeCritics:show_drinks' cafe.slug %}", true);
-                xhttp.open("GET", url, true);
-                xhttp.send();
-            }
-
-            function myFn1(xhttp) {
-                document.getElementById("menu").innerHTML = xhttp.responseText;
-            }
-
-            function myFn2(xhttp) {
-                document.getElementById("cafe").innerHTML = xhttp.responseText; }
-        </script>
-    </head>
-
-    <body>
-        <div id="menu">
-            <h1>{{ cafe.name }}</h1>
-            <div>
-                    <ul>
-                    <li>Location - {{ cafe.location }}</li>
-                    <li>Owner - {{ cafe.owner }}</li>
-                    <li>Average Rating - {{ cafe.average_rating }}</li>
-                </ul>
+<div class="container my-5">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h1 class="card-title">{{ cafe.name }}</h1>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><strong>Location:</strong> {{ cafe.location }}</li>
+                <li class="list-group-item"><strong>Owner:</strong> {{ cafe.owner }}</li>
+                <li class="list-group-item"><strong>Average Rating:</strong> {{ cafe.average_rating }}</li>
+            </ul>
+            <div id="menu" class="mb-3">
+                <p class="text-muted">Click the button below to load the drinks menu.</p>
             </div>
-            <button type="button"  onclick="loadDoc(drinksurl, myFn1)">See Drinks</button>
+            <button type="button" class="btn btn-primary me-2" onclick="loadDoc(drinksurl, myFn1)">See Drinks</button>
+            <a href="{% url 'cafeCritics:review' cafe.slug %}" class="btn btn-secondary">Add a Review</a>
         </div>
-        <div>
-            <a href="{% url 'cafeCritics:review' cafe.slug %}">Add a Review</a>
-        </div>
-        <a href="{% url 'cafeCritics:cafes' %}">View All Cafes</a>
-    </body>
+    </div>
+    
+    <div class="text-center">
+        <a href="{% url 'cafeCritics:cafes' %}" class="btn btn-outline-secondary">View All Cafes</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    var drinksurl = "{% url 'cafeCritics:show_drinks' cafe.slug %}";
+    var cafeurl = "{% url 'cafeCritics:show_cafeAJAX' cafe.slug %}";
+    function loadDoc(url, cFunction) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                cFunction(this);
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
+    function myFn1(xhttp) {
+        document.getElementById("menu").innerHTML = xhttp.responseText;
+    }
+</script>
 {% endblock %}
