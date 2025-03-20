@@ -75,11 +75,14 @@ def show_cafe(request, cafe_name_slug):
     try:
         cafe = Cafe.objects.get(slug=cafe_name_slug)
         drinks = Drink.objects.filter(cafe=cafe)
+        reviews = Review.objects.filter(cafe=cafe)
         context_dict['drinks'] = drinks
         context_dict['cafe'] = cafe
+        context_dict['reviews'] = reviews
     except Cafe.DoesNotExist:
         context_dict['cafe'] = None
         context_dict['drinks'] = None
+        context_dict['reviews'] = None
 
     return render(request, 'cafe.html', context=context_dict)
 
@@ -109,6 +112,7 @@ def show_cafeAJAX(request, cafe_name_slug):
 
     return render(request, 'cafeAJAX.html', context=context_dict)
 
+@login_required
 def review_view(request, cafe_name_slug):
     cafe = get_object_or_404(Cafe, slug=cafe_name_slug)
     if request.method == 'POST':

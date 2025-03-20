@@ -19,6 +19,29 @@
             </div>
         </div>
     </div>
+
+    <div class="container my-5">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h1 class="card-title">Reviews</h1>
+            </div>
+            <div class="card-body">
+                {% if reviews %}
+                    <ul class="list-group list-group-flush mb-3">
+                        {% for review in reviews %}
+                            <li class="list-group-item">
+                                <strong>{{ review.user.username }}:</strong>
+                                <p>{{ review.text }}</p>
+                                <strong>Rating:</strong> {{ review.rating }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">No reviews.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
     
     <div class="text-center">
         <a href="{% url 'cafeCritics:cafes' %}" class="btn btn-outline-secondary">View All Cafes</a>
