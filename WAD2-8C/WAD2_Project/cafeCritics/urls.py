@@ -1,6 +1,6 @@
 from django.urls import path
-from .import views 
-from .views import home_view, signup_view, login_view, cafe_setup_view
+from . import views
+from .views import home_view, no_access_view, signup_view, login_view, cafe_setup_view
 
 app_name = 'cafeCritics'
 
@@ -20,4 +20,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('profile/<str:username>/', views.profile_view, name='profile'),  # Added URL pattern for profile view
     path('cafe/<slug:cafe_name_slug>/edit/', views.edit_cafe_view, name='edit_cafe'),
+    path('no_access/', no_access_view, name='no_access'),
 ]
