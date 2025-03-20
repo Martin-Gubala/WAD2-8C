@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'WAD2_Project/cafeCritics/static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 MIDDLEWARE = [

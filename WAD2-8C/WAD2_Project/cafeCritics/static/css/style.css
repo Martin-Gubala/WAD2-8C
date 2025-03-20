@@ -85,7 +85,7 @@ h1, h2, h3 {
 }
 
 .hero {
-    background: url("/static/images/coffee-hero.jpeg") no-repeat center center;
+    background: url("/WAD2-8C/WAD2_Project/cafeCritics/static/css/images/coffee-hero.jpeg") no-repeat center center;
     background-size: cover;
     height: 60vh;
     position: relative;
@@ -133,4 +133,11 @@ h1, h2, h3 {
 
 .card-header {
     font-weight: bold;
+}
+
+body {
+    background-image: url('/static/css/images/coffee-hero.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
