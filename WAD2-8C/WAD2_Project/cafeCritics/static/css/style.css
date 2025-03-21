@@ -288,6 +288,24 @@ footer {
     width: auto;  
 }
 
+.about-text-container {
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 20px;
+    border-radius: 10px; 
+    margin-top: 20px; 
+}
+
+.about-text-container h1, .about-text-container h2 {
+    color: #ff9d00; 
+    text-shadow: black ;
+
+}
+
+.about-text-container p, .about-text-container ul {
+    color: #000000;
+    text-shadow: none;
+}
+
 
 
 
