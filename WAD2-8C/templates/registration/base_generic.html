@@ -37,7 +37,7 @@
                             <a class="nav-link" href="{% url 'cafeCritics:login' %}">Login</a>
                         {% endif %}
                         <a class="nav-link" href="{% url 'cafeCritics:account_settings' %}">Account Settings</a>
-                        {% if cafe %}
+                        {% if cafe and cafe.owner == user.request %}
                         <a class="nav-link" href="{% url 'cafeCritics:edit_cafe' cafe.slug %}">Edit Cafe</a>
                         {% endif %}
                     </div>
