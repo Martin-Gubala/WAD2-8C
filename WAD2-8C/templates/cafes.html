@@ -2,6 +2,22 @@
 {% block title %}All Cafes - Cafe Critics{% endblock %}
 
 {% block content %}
+<div class="container mt-3">
+    <form method="GET" action="" class="form-inline">
+        <div class="form-group mb-2">
+            <label for="ratingFilter" class="sr-only">Filter by Average Rating:</label>
+            <select class="form-control" id="ratingFilter" name="rating">
+                <option value="">Choose a rating</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Filter</button>
+    </form>
+</div>
 <div class="container my-5">
     <h2 class="text-center mb-4">All Cafes</h2>
     <div class="row row-cols-1 row-cols-md-2 g-4">

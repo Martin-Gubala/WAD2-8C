@@ -56,13 +56,14 @@ def home_view(request):
     })
 
 def cafes_view(request):
-    cafe_list = Cafe.objects.all()
-    
-    context_dict = {}
-    context_dict['cafes'] = cafe_list
+    rating = request.GET.get('rating')  # Get the rating value from the GET request
+    if rating:  # Check if a rating was provided
+        cafe_list = Cafe.objects.filter(average_rating=rating)  # Filter cafes by the provided rating
+    else:
+        cafe_list = Cafe.objects.all()  # No rating provided, show all cafes
 
-    response = render(request, 'cafes.html', context=context_dict)
-    return response
+    context_dict = {'cafes': cafe_list}
+    return render(request, 'cafes.html', context=context_dict)
 
 def about_view(request):
     return render(request, 'about.html')

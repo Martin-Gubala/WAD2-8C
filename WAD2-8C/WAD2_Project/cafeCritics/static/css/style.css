@@ -3,7 +3,7 @@ body, html {
     background-color: #f8f9fa;
     color: #333;
     position: relative;
-    height: 180%; 
+    height: 137%; 
     margin: 0; 
     padding: 0;
     background-position: center;
@@ -80,9 +80,10 @@ footer {
     transform: scale(1.02);
 }
 
-.row {
+.row-top-rated {
     display: flex;
     justify-content: center;
+    flex-wrap: nowrap;
     gap: 20px;
 }
 
@@ -205,6 +206,87 @@ footer {
     padding: 20px 0;
 }
 
+
+.card .card-title {
+    color: #ffcc00; 
+    text-shadow: none;
+}
+
+
+.menu-description {
+    color: rgb(255, 255, 255) !important;
+    text-shadow: none;
+}
+
+
+.drink-name {
+    color: #ffffff; 
+    text-shadow: none;
+
+}
+
+.drink-price {
+    color: #0cee2a; 
+    text-shadow: none;
+
+}
+
+.drink-rating {
+    color: #093d79; 
+    text-shadow: none;
+
+}
+
+.homepage-background {
+    background-image: url('/static/css/images/brown.jpg'); 
+    background-size: cover; 
+    background-position: center;     background-attachment: fixed; 
+}
+
+.login-background {
+    background-image: url('/static/css/images/brown.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+}
+
+
+.signup-background {
+    background-image: url('/static/css/images/brown.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+}
+
+.settings-background {
+    background-image: url('/static/css/images/brown.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+}
+
+
+
+.about-background {
+    background-image: url('/static/css/images/coffee-hero.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+}
+
+#ratingFilter {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+.form-inline .form-group {
+    margin-right: 10px;  
+}
+
+.form-inline select {
+    width: auto;  
+}
 
 
 

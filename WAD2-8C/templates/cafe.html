@@ -13,7 +13,7 @@
                 <li class="list-group-item"><strong>Average Rating:</strong> {{ cafe.average_rating }}</li>
             </ul>
             <div id="menu" class="mb-3">
-                <p class="text-muted">Click the button below to load the drinks menu.</p>
+                <p class="text-muted menu-description">Click the button below to load the drinks menu.</p>
                 <button type="button" class="btn btn-primary me-2" onclick="loadDoc(drinksurl, myFn1)">See Drinks</button>
                 <a href="{% url 'cafeCritics:review' cafe.slug %}" class="btn btn-secondary">Add a Review</a>
             </div>
