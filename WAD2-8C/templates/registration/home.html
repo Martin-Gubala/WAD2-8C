@@ -33,7 +33,7 @@
             <div class="card p-3">
                 <ul class="list-group">
                     {% for drink in top_drinks %}
-                        <li class="list-group-item">{{ drink.name }}</li>
+                        <li class="list-group-item">{{ drink.cafe }}: {{ drink.name }}</li>
                     {% endfor %}
                 </ul>
             </div>
