@@ -1,7 +1,7 @@
 body, html {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
+    font-family: 'Arial', sans-serif; /* Sets the default font for the entire application */
+    background-color: #f8f9fa; /* Light grey background color for easier reading */
+    color: #333; /* Default text color set to dark grey for contrast */
     position: relative;
     height: 137%; 
     margin: 0; 
@@ -11,75 +11,82 @@ body, html {
     background-size: cover;
 }
 
+/* Styling for list items within groups, enhancing visibility and readability */
 .list-group-item {
-    background-color: #A67B5B !important; 
-    color: #ffffff !important;
-    border-color: #8B5742 !important;
+    background-color: #A67B5B !important; /* Dark brown background for standout list items */
+    color: #ffffff !important; /* White text for high contrast on dark background */
+    border-color: #8B5742 !important; /* Dark brown border to complement the background */
 }
 
+/* Card components styles for content sections like notifications or promotional content */
 .card {
-    background-color: rgba(166, 123, 91, 0.8) !important;
-    border: 1px solid #ffffff !important;
+    background-color: rgba(166, 123, 91, 0.8) !important; /* Semi-transparent brown background for card elements */
+    border: 1px solid #ffffff !important; /* White border to distinguish cards from the background */
 }
 
+/* Footer styling to anchor at the bottom of the page */
 footer {
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #333;
-    color: white;
+    background-color: #333; /* Dark background for footer for visual separation */
+    color: white; /* White text for readability */
     text-align: center;
     padding: 10px 0;
 }
 
+/* Navbar styling for navigation elements */
 .navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background: url('/static/css/images/brown.jpg') repeat;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background: url('/static/css/images/brown.jpg') repeat; /* Repeating brown background pattern */
     background-size: cover;
-    background-color: #ffffff;
+    background-color: #ffffff; /* Fallback white background color */
 }
 
+/* Hero section styling for prominent display areas, typically used for showcasing key content */
 .hero {
     text-align: center;
     padding: 50px 20px;
-    background-color: #fff;
+    background-color: #fff; /* Pure white background for clarity */
 }
 
+/* Primary button styles with hover effects for interactivity */
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    transition: 0.3s;
+    background-color: #007bff; /* Bright blue background for primary buttons */
+    border-color: #007bff; /* Matching border color */
+    transition: 0.3s; /* Smooth transition for hover effects */
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
+    background-color: #0056b3; /* Darker blue on hover for visual feedback */
+    border-color: #004085; /* Corresponding darker border */
 }
 
-
+/* Secondary button styles with hover effects for additional options */
 .btn-outline-secondary {
-    color: #6c757d; 
-    border-color: #007bff; 
-    background-color: #007bff; 
+    color: #6c757d; /* Grey color for secondary buttons */
+    border-color: #007bff; /* Blue border to relate to primary button styles */
+    background-color: #007bff; /* Blue background to maintain consistency with primary buttons */
 }
 
 .btn-outline-secondary:hover {
-    color: #fff;
-    background-color: #0056b3;
-    border-color: #004085; 
+    color: #fff; /* White text on hover for better readability */
+    background-color: #0056b3; /* Darker blue background on hover */
+    border-color: #004085; /* Matching darker border on hover */
 }
 
-
+/* Styling for cards with hover effects to make them interactive and engaging */
 .card {
-    border-radius: 10px;
-    transition: transform 0.2s ease-in-out;
+    border-radius: 10px; /* Rounded corners for aesthetic appeal */
+    transition: transform 0.2s ease-in-out; /* Smooth transition for the scale effect */
 }
 
 .card:hover {
-    transform: scale(1.02);
+    transform: scale(1.02); /* Slightly enlarges the card on hover for a subtle interaction cue */
 }
 
+/* Row styles for top-rated items, using flexbox for alignment and spacing */
 .row-top-rated {
     display: flex;
     justify-content: center;
@@ -87,226 +94,168 @@ footer {
     gap: 20px;
 }
 
-.list-group-item {
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-h1, h2, h3 {
-    text-align: center;
-}
-
-
+/* Specific styles for login and signup forms to ensure they are clearly visible and easy to use */
 .login-form, .signup-form {
-    max-width: 400px;
-    margin: 0 auto;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Maximum width to keep forms manageable in size */
+    margin: 0 auto; /* Centering forms horizontally */
+    background: #f9f9f9; /* Light grey background to differentiate form from other content */
+    padding: 20px; /* Padding around form elements for spacing */
+    border-radius: 10px; /* Rounded corners for aesthetic appeal */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
 }
 
 .login-form label, .signup-form label {
-    font-weight: bold;
+    font-weight: bold; /* Bold labels for better visibility */
 }
 
 .login-form input, .signup-form input {
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Spacing between input fields */
 }
 
 .btn {
-    margin-top: 10px;
+    margin-top: 10px; /* Space above buttons */
 }
 
+/* Additional hero section styling for backgrounds with images */
 .hero {
-    background: url("/WAD2-8C/WAD2_Project/cafeCritics/static/css/images/coffee-hero.jpeg") no-repeat center center;
-    background-size: cover;
-    height: 60vh;
-    position: relative;
+    background: url("/WAD2-8C/WAD2_Project/cafeCritics/static/css/images/coffee-hero.jpeg") no-repeat center center; /* Background image for hero section */
+    background-size: cover; /* Ensures the image covers the entire section */
+    height: 60vh; /* Sets height of hero section */
+    position: relative; /* Allows for absolute positioning of content within */
 }
 
 .hero-content {
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5); 
-    padding: 20px;
-    border-radius: 10px;
+    color: white; /* White text for readability against dark backgrounds */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background for contrast */
+    padding: 20px; /* Padding within hero content */
+    border-radius: 10px; /* Rounded corners for aesthetic appeal */
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 3rem; /* Large font size for hero heading */
+    margin-bottom: 0.5rem; /* Space below heading */
 }
 
 .hero p.lead {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Slightly larger font for lead paragraph */
 }
 
 .bi {
-    font-size: 1.3rem;
-    margin-right: 5px;
-}
-
-.card {
-    border-radius: 8px;
-    transition: transform 0.2s ease-in-out;
-}
-
-.card:hover {
-    transform: scale(1.02);
+    font-size: 1.3rem; /* Size for icons */
+    margin-right: 5px; /* Space between icons and text */
 }
 
 .card-img-top {
-    object-fit: cover;
-    height: 200px; 
-}
-
-.card-img-top {
-    object-fit: cover;
-    height: 200px;
+    object-fit: cover; /* Ensures images fit well within their containers */
+    height: 200px; /* Fixed height for card images */
 }
 
 .card-header {
-    font-weight: bold;
+    font-weight: bold; /* Bold text for card headers */
 }
 
 body {
-    background-image: url('/static/css/images/coffee-hero.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-image: url('/static/css/images/coffee-hero.jpg'); /* Background image for body */
+    background-size: cover; /* Ensures the image covers the entire page */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents repeating of background image */
 }
-
 
 .card {
-    background-color: rgba(255, 255, 255, 0.95); 
-    padding: 30px; 
-    margin: 10px 0;
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white background for cards */
+    padding: 30px; /* Padding within card elements */
+    margin: 10px 0; /* Margin above and below cards */
+    border-radius: 10px; /* Rounded corners for aesthetic appeal */
 }
 
-
 .hero-content, .list-group-item {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0%, rgba(0,0,0,0.3) 75%, rgba(0,0,0,0) 100%);
-    color: rgb(0, 0, 0);
-    padding: 20px;
-    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0%, rgba(0,0,0,0.3) 75%, rgba(0,0,0,0) 100%); /* Gradient background for depth */
+    color: rgb(0, 0, 0); /* Text color for readability */
+    padding: 20px; /* Padding within content */
+    border-radius: 10px; /* Rounded corners for aesthetic appeal */
 }
 
 body, h1, h2, h3, p, .nav-link, .btn, .list-group-item {
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); 
+    color: #ffffff; /* Default text color set to white for contrast */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle text shadow for depth */
 }
 
+/* Footer styling with dark background for separation */
 footer {
-    background-color: #000; 
-    color: #fff;
-    padding: 20px 0;
+    background-color: #000; /* Black background for footer */
+    color: #fff; /* White text for readability */
+    padding: 20px 0; /* Padding above and below footer content */
 }
-
 
 .card .card-title {
-    color: #ffcc00; 
-    text-shadow: none;
+    color: #ffcc00; /* Gold color for card titles */
+    text-shadow: none; /* No text shadow for clarity */
 }
-
 
 .menu-description {
-    color: rgb(255, 255, 255) !important;
-    text-shadow: none;
+    color: rgb(255, 255, 255) !important; /* White color for menu descriptions */
+    text-shadow: none; /* No text shadow for clarity */
 }
 
-
 .drink-name {
-    color: #ffffff; 
-    text-shadow: none;
-
+    color: #ffffff; /* White color for drink names */
+    text-shadow: none; /* No text shadow for clarity */
 }
 
 .drink-price {
-    color: #0cee2a; 
-    text-shadow: none;
-
+    color: #0cee2a; /* Bright green color for drink prices */
+    text-shadow: none; /* No text shadow for clarity */
 }
 
 .drink-rating {
-    color: #093d79; 
-    text-shadow: none;
-
+    color: #093d79; /* Dark blue color for drink ratings */
+    text-shadow: none; /* No text shadow for clarity */
 }
 
-.homepage-background {
-    background-image: url('/static/css/images/brown.jpg'); 
-    background-size: cover; 
-    background-position: center;     background-attachment: fixed; 
+/* Background styles for various sections with fixed attachment */
+.homepage-background, .login-background, .signup-background, .settings-background {
+    background-image: url('/static/css/images/brown.jpg'); /* Common brown background for various sections */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Keeps background fixed during scroll */
 }
-
-.login-background {
-    background-image: url('/static/css/images/brown.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
-}
-
-
-.signup-background {
-    background-image: url('/static/css/images/brown.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
-}
-
-.settings-background {
-    background-image: url('/static/css/images/brown.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
-}
-
-
 
 .about-background {
-    background-image: url('/static/css/images/coffee-hero.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
+    background-image: url('/static/css/images/coffee-hero.jpg'); /* Background image for about section */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Keeps background fixed during scroll */
 }
 
 #ratingFilter {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
+    position: absolute; /* Allows for positioning over elements */
+    top: 10px; /* Distance from top */
+    left: 10px; /* Distance from left */
+    z-index: 1000; /* Ensures it appears above other elements */
 }
+
 .form-inline .form-group {
-    margin-right: 10px;  
+    margin-right: 10px; /* Spacing between form groups */
 }
 
 .form-inline select {
-    width: auto;  
+    width: auto; /* Auto width for select dropdowns */
 }
 
+/* About text container styling for readability */
 .about-text-container {
-    background-color: rgba(255, 255, 255, 0.8); 
-    padding: 20px;
-    border-radius: 10px; 
-    margin-top: 20px; 
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for text container */
+    padding: 20px; /* Padding within the container */
+    border-radius: 10px; /* Rounded corners for aesthetic appeal */
+    margin-top: 20px; /* Space above the container */
 }
 
 .about-text-container h1, .about-text-container h2 {
-    color: #ff9d00; 
-    text-shadow: black ;
-
+    color: #ff9d00; /* Gold color for headings */
+    text-shadow: black; /* Black text shadow for depth */
 }
 
 .about-text-container p, .about-text-container ul {
-    color: #000000;
-    text-shadow: none;
+    color: #000000; /* Black text for paragraphs and lists */
+    text-shadow: none; /* No text shadow for clarity */
 }
-
-
-
-
-
