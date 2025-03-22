@@ -1,15 +1,15 @@
 {% extends 'registration/base_generic.html' %}
-{% block body_class %}homepage-background{% endblock %}
-{% block title %}Cafe Critics - Home{% endblock %}
+{% block body_class %}homepage-background{% endblock %} <!-- Sets a specific background for the homepage -->
+{% block title %}Cafe Critics - Home{% endblock %}  <!-- Sets the title of the webpage -->
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="text-center">Cafe Critics</h1>
-
+    <h1 class="text-center">Cafe Critics</h1> <!-- Main heading of the page -->
+    <!-- Button to view all cafes, linking to the cafes page -->
     <div class="text-center mb-4">
         <a href="{% url 'cafeCritics:cafes' %}" class="btn btn-primary">View All Cafes</a>
     </div>
-
+    <!-- Section displaying top rated cafes and drinks -->
     <div class="row row-top-rated">
         <!-- Top Rated Cafes -->
         <div class="col-md-6">
@@ -18,9 +18,9 @@
                 <ul class="list-group">
                     {% for cafe in top_cafes %}
                         <li class="list-group-item">
-                            <h5>{{ cafe.name }}</h5>
-                            <p>{{ cafe.description }}</p>
-                            <img src="{{ cafe.photo.url }}" alt="{{ cafe.name }}" class="img-fluid rounded">
+                            <h5>{{ cafe.name }}</h5> <!-- Display cafe name -->
+                            <p>{{ cafe.description }}</p> <!-- Display cafe description -->
+                            <img src="{{ cafe.photo.url }}" alt="{{ cafe.name }}" class="img-fluid rounded"> <!-- Display cafe photo -->
                         </li>
                     {% endfor %}
                 </ul>
@@ -33,7 +33,7 @@
             <div class="card p-3">
                 <ul class="list-group">
                     {% for drink in top_drinks %}
-                        <li class="list-group-item">{{ drink.cafe }}: {{ drink.name }}</li>
+                        <li class="list-group-item">{{ drink.cafe }}: {{ drink.name }}</li> <!-- Display drink name and associated cafe -->
                     {% endfor %}
                 </ul>
             </div>

@@ -2,10 +2,12 @@
 
 {% block content %}
     <h1>Add Review</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+    <!-- Form for submitting a new review -->
+    <form method="post"><!-- POST method to securely send data to the server -->
+        {% csrf_token %}<!-- CSRF token to protect against CSRF attacks -->
+        {{ form.as_p }}<!-- Renders the form fields as paragraphs for better readability -->
+        <button type="submit">Submit</button><!-- Button to submit the form -->
     </form>
+    <!-- Link to go back to the detailed page of the cafe -->
     Go back to the <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a> page
 {% endblock %}

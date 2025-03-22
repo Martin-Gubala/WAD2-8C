@@ -4,17 +4,20 @@
 
 {% block content %}
     <h2>Search Results</h2>
+    <!-- Conditional display based on the presence of a search query -->
     {% if query %}
-        <p>Results for: <strong>{{ query }}</strong></p>
+        <p>Results for: <strong>{{ query }}</strong></p><!-- Displays the user's search query -->
     {% endif %}
-
+    <!-- Checks if there are any results to display -->
     {% if results %}
         <ul>
+            <!-- Loop through each result and create a list item linking to the cafe detail page -->
             {% for cafe in results %}
                 <li><a href="{% url 'cafeCritics:cafe_detail' cafe.id %}">{{ cafe.name }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
+        <!-- Message displayed if no results are found -->
         <p>No cafes found matching your search.</p>
     {% endif %}
 {% endblock %}

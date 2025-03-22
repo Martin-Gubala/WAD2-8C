@@ -1,21 +1,25 @@
-{% extends 'registration/base_generic.html' %}
-{% block body_class %}login-background{% endblock %}
-{% block title %}Login{% endblock %}
+{% extends 'registration/base_generic.html' %} <!-- Extends the base layout to maintain consistency across the site -->
+{% block body_class %}login-background{% endblock %} <!-- Applies specific CSS class for custom background styling on the login page -->
+{% block title %}Login{% endblock %} <!-- Sets the title of the page to 'Login' -->
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center">Login</h2>
-    <form method="post" class="login-form">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="username" class="form-label">Username:</label>
-            <input type="text" name="username" class="form-control" id="username">
+    <h2 class="text-center">Login</h2> <!-- Page heading centered at the top of the form -->
+
+    <form method="post" class="login-form"> <!-- Form for login, POST method ensures credentials are not visible in URL -->
+        {% csrf_token %} <!-- CSRF token for protection against Cross-Site Request Forgery attacks -->
+        
+        <div class="mb-3"> <!-- Bootstrap class for margin-bottom for spacing -->
+            <label for="username" class="form-label">Username:</label> <!-- Label for the username input -->
+            <input type="text" name="username" class="form-control" id="username"> <!-- Text input field for username -->
+        </div>
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="password" name="password" class="form-control" id="password">
+            <label for="password" class="form-label">Password:</label><!-- Label for the password input -->
+            <input type="password" name="password" class="form-control" id="password"><!-- Password input field, hides characters -->
         </div>
-        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <button type="submit" class="btn btn-primary w-100">Login</button><!-- Submit button for the form, styled with Bootstrap -->
 </form>
+<!-- Link for users who do not have an account to navigate to the sign-up page -->
 <p class="mt-3 text-center">Don't have an account? <a href="{% url 'cafeCritics:signup' %}">Sign Up here.</a></p>
 </div>
 {% endblock %}

@@ -5,26 +5,33 @@
 {% block content %}
 <div class="container mt-5">
     <h2 class="text-center">Sign Up</h2>
-    <form method="post" class="signup-form">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="username" class="form-label">Username:</label>
-            <input type="text" name="username" class="form-control" id="username">
+
+    <!-- Form for user registration -->
+    <form method="post" class="signup-form"><!-- POST method to securely send data to the server -->
+        {% csrf_token %}<!-- CSRF token for protection against CSRF attacks -->
+        <div class="mb-3"> <!-- Form group for username input -->
+        <div class="mb-3"><!-- Form group for username input -->
+            <label for="username" class="form-label">Username:</label><!-- Label for the username field -->
+            <input type="text" name="username" class="form-control" id="username"><!-- Input field for username -->
         </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address:</label>
-            <input type="email" name="email" class="form-control" id="email">
+
+        <div class="mb-3"><!-- Form group for email input -->
+            <label for="email" class="form-label">Email address:</label><!-- Label for the email field -->
+            <input type="email" name="email" class="form-control" id="email"><!-- Input field for email -->
         </div>
-        <div class="mb-3">
-            <label for="password1" class="form-label">Password:</label>
-            <input type="password" name="password1" class="form-control" id="password1">
+
+        <div class="mb-3"><!-- Form group for password input -->
+            <label for="password1" class="form-label">Password:</label><!-- Label for the password field -->
+            <input type="password" name="password1" class="form-control" id="password1"><!-- Input field for password -->
         </div>
-        <div class="mb-3">
-            <label for="password2" class="form-label">Confirm Password:</label>
-            <input type="password" name="password2" class="form-control" id="password2">
+
+        <div class="mb-3"><!-- Form group for confirming password -->
+            <label for="password2" class="form-label">Confirm Password:</label><!-- Label for the password confirmation field -->
+            <input type="password" name="password2" class="form-control" id="password2"><!-- Input field for confirming the password -->
         </div>
-        <button type="submit" class="btn btn-success w-100">Sign Up</button>
+        <button type="submit" class="btn btn-success w-100">Sign Up</button><!-- Submit button for the form -->
     </form>
+    <!-- Link for users who already have an account to navigate to the login page -->
     <p class="mt-3 text-center">Already have an account? <a href="{% url 'cafeCritics:login' %}">Login here.</a></p>
 </div>
 {% endblock %}

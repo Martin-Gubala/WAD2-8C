@@ -1,27 +1,35 @@
 {% extends 'registration/base_generic.html' %}
 {% block content %}
+<!-- Page title -->
 <h2>Set Up Your Cafe</h2>
+<!-- Form for setting up a new cafe -->
 <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+    {% csrf_token %} <!-- CSRF token for form security -->
+    {{ form.as_p }} <!-- Django form rendered as paragraph elements -->
+    <!-- Field for entering a description of the cafe -->
     <div>
         <label for="cafe-description">Cafe Description:</label>
         <textarea name="cafe-description" id="cafe-description"></textarea>
     </div>
+    <!-- File input for uploading a cafe photo -->
     <div>
         <label for="cafe-photo">Cafe Photo:</label>
         <input type="file" name="cafe-photo" id="cafe-photo">
     </div>
+    <!-- Container for dynamic addition of drink forms -->
     <div id="drinks-container">
         <h3>Drinks</h3>
         <button type="button" id="add-drink">Add Drink</button>
     </div>
+    <!-- Submit button for the form -->
     <button type="submit">Submit</button>
 </form>
+<!-- Script for dynamically adding additional drink forms -->
 <script>
     document.getElementById('add-drink').addEventListener('click', function() {
         const container = document.getElementById('drinks-container');
-        const index = container.children.length - 1;
+        const index = container.children.length - 1; // Get index for the next drink item
+        // HTML for the new drink form, using backticks for multi-line strings
         const drinkForm = `
             <div class="drink-form">
                 <label for="drinks-${index}-name">Drink Name:</label>
@@ -30,6 +38,7 @@
                 <input type="file" name="drinks-${index}-photo" id="drinks-${index}-photo">
             </div>
         `;
+        // Insert the new drink form into the container
         container.insertAdjacentHTML('beforeend', drinkForm);
     });
 </script>

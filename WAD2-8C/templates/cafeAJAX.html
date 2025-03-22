@@ -1,7 +1,9 @@
 <body>
     <div id="menu">
         <p class="text-muted menu-description">Click the button below to load the drinks menu.</p>
+        <!-- Button to trigger drinks menu loading -->
         <button type="button" class="btn btn-primary me-2" onclick="loadDoc(drinksurl, myFn1)">See Drinks</button>
+        <!-- Link to add a review for the cafe -->
         <a href="{% url 'cafeCritics:review' cafe.slug %}" class="btn btn-secondary">Add a Review</a>
     </div>
 </body>

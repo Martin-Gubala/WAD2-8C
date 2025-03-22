@@ -2,9 +2,10 @@
 
 {% block content %}
     <h2>Edit Cafe</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+    <!-- Form for editing cafe details -->
+    <form method="post"><!-- POST method to securely send data to the server -->
+        {% csrf_token %}<!-- CSRF token to protect against CSRF attacks -->
+        {{ form.as_p }}<!-- Renders the form fields as paragraphs for better readability -->
+        <button type="submit">Submit</button><!-- Button to submit the form, saving changes -->
     </form>
 {% endblock %}

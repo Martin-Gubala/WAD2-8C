@@ -1,32 +1,35 @@
 {% extends 'registration/base_generic.html' %}
 
 {% block content %}
-    <h1>{{ user_profile.user.username }}'s Profile</h1>
-    <p>User Type: {{ user_profile.get_user_type_display }}</p>
-
+    <h1>{{ user_profile.user.username }}'s Profile</h1><!-- Displays the username from the user profile -->
+    <p>User Type: {{ user_profile.get_user_type_display }}</p><!-- Shows the display value of the user type -->
+    <!-- Conditional block for users with a 'business' profile type -->
     {% if user_profile.user_type == 'business' %}
-        <h2>Owned Cafes</h2>
-        {% if cafes %}
+        <h2>Owned Cafes</h2><!-- Heading for the section displaying cafes owned by the user -->
+        {% if cafes %}<!-- Checks if there are any cafes associated with the user -->
             <ul>
-                {% for cafe in cafes %}
-                    <li><a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a></li>
+                {% for cafe in cafes %}<!-- Loop through each cafe owned by the user -->
+                    <li><a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a></li><!-- Creates a link to the detail view of each cafe -->
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No cafes owned.</p>
+            <p>No cafes owned.</p><!-- Displayed if the user does not own any cafes -->
         {% endif %}
-    {% elif user_profile.user_type == 'personal' %}
-        <h2>Reviews</h2>
-        {% if reviews %}
+    {% elif user_profile.user_type == 'personal' %}<!-- Conditional block for users with a 'personal' profile type -->
+        <h2>Reviews</h2> <!-- Heading for the section displaying reviews made by the user -->
+        {% if reviews %}<!-- Checks if there are any reviews written by the user -->
             <ul>
                 {% for review in reviews %}
                     <li>
-                        <strong>{{ review.cafe.name }}</strong>: {{ review.text }} (Rating: {{ review.rating }})
+                        <strong>{{ review.cafe.name }}</strong>: {{ review.text }} (Rating: {{ review.rating }})<!-- Displays the cafe name, review text, and rating -->
+                    </li>
+                {% endfor %}
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No reviews written.</p>
+            <p>No reviews written.</p> <!-- Displayed if the user has not written any reviews -->
+            {% endif %}
         {% endif %}
     {% endif %}
 {% endblock %}

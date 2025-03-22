@@ -4,18 +4,18 @@
 <div class="container my-5">
     <div class="card mb-4">
         <div class="card-header">
-            <h1 class="card-title">{{ cafe.name }}</h1>
+            <h1 class="card-title">{{ cafe.name }}</h1><!-- Displaying the name of the cafe in the card header -->
         </div>
         <div class="card-body">
-            <ul class="list-group list-group-flush mb-3">
-                <li class="list-group-item"><strong>Location:</strong> {{ cafe.location }}</li>
-                <li class="list-group-item"><strong>Owner:</strong> {{ cafe.owner }}</li>
-                <li class="list-group-item"><strong>Average Rating:</strong> {{ cafe.average_rating }}</li>
+            <ul class="list-group list-group-flush mb-3"> <!-- List group for cafe details -->
+                <li class="list-group-item"><strong>Location:</strong> {{ cafe.location }}</li><!-- Displays the location of the cafe -->
+                <li class="list-group-item"><strong>Owner:</strong> {{ cafe.owner }}</li><!-- Displays the owner of the cafe -->
+                <li class="list-group-item"><strong>Average Rating:</strong> {{ cafe.average_rating }}</li><!-- Displays the average rating of the cafe -->
             </ul>
-            <div id="menu" class="mb-3">
-                <p class="text-muted menu-description">Click the button below to load the drinks menu.</p>
-                <button type="button" class="btn btn-primary me-2" onclick="loadDoc(drinksurl, myFn1)">See Drinks</button>
-                <a href="{% url 'cafeCritics:review' cafe.slug %}" class="btn btn-secondary">Add a Review</a>
+            <div id="menu" class="mb-3"> <!-- Container for the drinks menu actions -->
+                <p class="text-muted menu-description">Click the button below to load the drinks menu.</p><!-- Instructions for loading the drinks menu -->
+                <button type="button" class="btn btn-primary me-2" onclick="loadDoc(drinksurl, myFn1)">See Drinks</button><!-- Button to trigger drinks menu loading -->
+                <a href="{% url 'cafeCritics:review' cafe.slug %}" class="btn btn-secondary">Add a Review</a><!-- Link to add a review for the cafe -->
             </div>
         </div>
     </div>
@@ -26,49 +26,50 @@
                 <h1 class="card-title">Reviews</h1>
             </div>
             <div class="card-body">
-                {% if reviews %}
+                {% if reviews %}<!-- Checking if there are any reviews to display -->
                     <ul class="list-group list-group-flush mb-3">
-                        {% for review in reviews %}
+                        {% for review in reviews %}<!-- Looping through each review -->
                             <li class="list-group-item">
-                                <strong>{{ review.user.username }}:</strong>
-                                <p>{{ review.text }}</p>
-                                <strong>Rating:</strong> {{ review.rating }}
+                                <strong>{{ review.user.username }}:</strong><!-- Displaying the reviewer's username -->
+                                <p>{{ review.text }}</p> <!-- Displaying the review text -->
+                                <strong>Rating:</strong> {{ review.rating }}<!-- Displaying the rating given by the reviewer -->
+                            </li>
                             </li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p class="text-muted">No reviews.</p>
+                    <p class="text-muted">No reviews.</p><!-- Message displayed if no reviews are available -->
                 {% endif %}
             </div>
         </div>
     </div>
     
     <div class="text-center">
-        <a href="{% url 'cafeCritics:cafes' %}" class="btn btn-outline-secondary">View All Cafes</a>
+        <a href="{% url 'cafeCritics:cafes' %}" class="btn btn-outline-secondary">View All Cafes</a><!-- Link to view all cafes -->
     </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript">
-    var drinksurl = "{% url 'cafeCritics:show_drinks' cafe.slug %}";
-    var cafeurl = "{% url 'cafeCritics:show_cafeAJAX' cafe.slug %}";
+    var drinksurl = "{% url 'cafeCritics:show_drinks' cafe.slug %}";<!-- Variable for the URL to load drinks data -->
+    var cafeurl = "{% url 'cafeCritics:show_cafeAJAX' cafe.slug %}";<!-- Variable for the URL to load cafe details dynamically -->
     function loadDoc(url, cFunction) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                cFunction(this);
+        var xhttp = new XMLHttpRequest();<!-- Creating a new XMLHttpRequest object to handle AJAX -->
+        xhttp.onreadystatechange = function() {<!-- Event handler for when the AJAX call state changes -->
+            if (this.readyState == 4 && this.status == 200) {<!-- Check if AJAX call was successful -->
+                cFunction(this);<!-- Calling the callback function to handle the AJAX response -->
             }
         };
-        xhttp.open("GET", url, true);
-        xhttp.send();
+        xhttp.open("GET", url, true);<!-- Configuring the AJAX request -->
+        xhttp.send();<!-- Sending the AJAX request -->
     }
     function myFn1(xhttp) {
-        document.getElementById("menu").innerHTML = xhttp.responseText;
+        document.getElementById("menu").innerHTML = xhttp.responseText;<!-- Updating the HTML of the menu element with the AJAX response -->
     }
 
     function myFn2(xhttp) {
-        document.getElementById("cafe").innerHTML = xhttp.responseText;
+        document.getElementById("cafe").innerHTML = xhttp.responseText;<!-- Updating the HTML of the cafe element with the AJAX response -->
     }
 </script>
 {% endblock %}
