@@ -19,9 +19,18 @@ from django.contrib.auth import views as auth_views
 from cafeCritics.views import home_view  
 
 urlpatterns = [
+    # URL pattern for admin site
     path('admin/', admin.site.urls),
+
+    # URL pattern for user login, utilitizing Django's built in login view
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+
+    # URL pattern to include all URLs from the cafeCritics application
     path('', include('cafeCritics.urls', namespace='cafeCritics')),  
-    path('home/', home_view, name='home_page'),  
+
+    # Direct URL to the home page of the site
+    path('home/', home_view, name='home_page'), 
+
+    # Repeated inclusion of cafeCritics URLs under a different path  
     path('users/', include('cafeCritics.urls', namespace='cafeCritics')),
 ]
