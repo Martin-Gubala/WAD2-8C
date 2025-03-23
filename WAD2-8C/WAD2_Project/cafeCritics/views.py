@@ -19,19 +19,13 @@ def signup_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            # Saves the new user to the database
-            form.save()
-            # Login the user after signing up
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            # Save the user and log them in
+            user = form.save()
             login(request, user)
-            # Redirect the user to the home page with context
-            context_dict = {
-                'top_cafes': Cafe.objects.order_by('-average_rating')[:5],
-                'top_drinks': Drink.objects.order_by('-rating')[:5]
-            }
-            return render(request, 'registration/home.html', context=context_dict)
+            return redirect('cafeCritics:home_page')  # Redirect to the homepage
+        else:
+            # If the form is invalid, display errors
+            return render(request, 'registration/signup.html', {'form': form, 'show_search': False})
     else:
         form = UserRegistrationForm()
     return render(request, 'registration/signup.html', {'form': form, 'show_search': False})

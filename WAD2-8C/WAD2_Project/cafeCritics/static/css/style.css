@@ -96,20 +96,31 @@ footer {
 
 /* Specific styles for login and signup forms to ensure they are clearly visible and easy to use */
 .login-form, .signup-form {
+    color: #333; /* Dark grey text for readability */
+    text-shadow: none;
     max-width: 400px; /* Maximum width to keep forms manageable in size */
     margin: 0 auto; /* Centering forms horizontally */
     background: #f9f9f9; /* Light grey background to differentiate form from other content */
     padding: 20px; /* Padding around form elements for spacing */
     border-radius: 10px; /* Rounded corners for aesthetic appeal */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .login-form label, .signup-form label {
+    text-shadow: none;
+    color: #333; /* Dark grey labels for contrast */
     font-weight: bold; /* Bold labels for better visibility */
 }
 
 .login-form input, .signup-form input {
+    text-shadow: none ;
+    color: #333; /* Dark grey text for input fields */
     margin-bottom: 10px; /* Spacing between input fields */
+}
+
+.signup-form .helptext {
+    color: #333; /* Set help text color to black */
+    text-shadow: none ;
 }
 
 .btn {

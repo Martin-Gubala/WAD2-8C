@@ -11,7 +11,7 @@ class UserRegistrationForm(UserCreationForm):
         ('business', 'Business'),
     )
     # Fields for selecting user type during registration
-    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES)
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, label="Account Type")
 
     class Meta:
         model = User
