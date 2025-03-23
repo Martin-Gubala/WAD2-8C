@@ -162,7 +162,7 @@ def cafe_setup_view(request):
 def search_results(request):
     query = request.GET.get('q', '')
     results = Cafe.objects.filter(name__icontains=query) if query else None
-    return render(request, 'search_results.html', {'query':query, 'results': results})
+    return render(request, 'registration/search_results.html', {'query': query, 'results': results})
 
 # Displays a user's profile page, showcasing their cafes if they are business users, and their reviews if they are personal users.
 def profile_view(request, username):

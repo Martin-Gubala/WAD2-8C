@@ -13,7 +13,7 @@
         <ul>
             <!-- Loop through each result and create a list item linking to the cafe detail page -->
             {% for cafe in results %}
-                <li><a href="{% url 'cafeCritics:cafe_detail' cafe.id %}">{{ cafe.name }}</a></li>
+            <li><a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
