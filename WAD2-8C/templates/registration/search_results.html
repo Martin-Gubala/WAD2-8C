@@ -3,21 +3,30 @@
 {% block title %}Search Results{% endblock %}
 
 {% block content %}
-    <h2>Search Results</h2>
-    <!-- Conditional display based on the presence of a search query -->
-    {% if query %}
-        <p>Results for: <strong>{{ query }}</strong></p><!-- Displays the user's search query -->
-    {% endif %}
-    <!-- Checks if there are any results to display -->
+<div class="container mt-3">
+    <h2>Search Results for "{{ query }}"</h2>
+    <form method="GET" action="{% url 'cafeCritics:search' %}" class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search again..." aria-label="Search" name="q" value="{{ query }}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
     {% if results %}
-        <ul>
-            <!-- Loop through each result and create a list item linking to the cafe detail page -->
-            {% for cafe in results %}
-            <li><a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a></li>
-            {% endfor %}
-        </ul>
+    <div class="row">
+        {% for cafe in results %}
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="{{ cafe.photo.url }}" class="card-img-top" alt="{{ cafe.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cafe.name }}</h5>
+                    <p class="card-text">{{ cafe.description }}</p>
+                    <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="btn btn-primary">View Cafe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     {% else %}
-        <!-- Message displayed if no results are found -->
-        <p>No cafes found matching your search.</p>
+    <p>No cafes found matching your search. Try different keywords.</p>
     {% endif %}
+</div>
 {% endblock %}
