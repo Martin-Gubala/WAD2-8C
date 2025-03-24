@@ -340,3 +340,60 @@ footer {
 .login-form button[type="submit"]:hover {
     background-color: #3e8e41;
 }
+
+/* Styles for the review form container */
+.review-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95); /* Light background for readability */
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    
+}
+
+/* Styles for review form elements */
+.review-form label {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+    text-shadow: none;
+}
+
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-size: 1rem;
+    resize: vertical;
+    text-shadow: none;
+}
+
+/* Style the submit button */
+.review-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    text-shadow: none;
+}
+
+.review-form button[type="submit"]:hover {
+    background-color: #3e8e41;
+    text-shadow: none;
+}
+
+/* Fade-in animation */
+.review-container {
+    animation: fadeIn 1.2s ease-out forwards;
+    text-shadow: none;
+}

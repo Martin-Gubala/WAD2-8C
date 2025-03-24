@@ -1,13 +1,29 @@
 {% extends 'registration/base_generic.html' %}
 
 {% block content %}
-    <h1>Add Review</h1>
-    <!-- Form for submitting a new review -->
-    <form method="post"><!-- POST method to securely send data to the server -->
-        {% csrf_token %}<!-- CSRF token to protect against CSRF attacks -->
-        {{ form.as_p }}<!-- Renders the form fields as paragraphs for better readability -->
-        <button type="submit">Submit</button><!-- Button to submit the form -->
-    </form>
-    <!-- Link to go back to the detailed page of the cafe -->
-    Go back to the <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a> page
+    <div class="review-container"> <!-- Container for the review section -->
+        <h1 class="text-center">Add Review</h1> <!-- Centered heading -->
+
+        <!-- Form for submitting a new review -->
+        <form method="post" class="review-form"> <!-- POST method to securely send data to the server -->
+            {% csrf_token %} <!-- CSRF token to protect against CSRF attacks -->
+
+            <div class="form-group"> <!-- Group for rating input -->
+                <label for="id_rating"><strong>Rating:</strong></label>
+                {{ form.rating }} <!-- Rating input -->
+            </div>
+
+            <div class="form-group"> <!-- Group for text input -->
+                <label for="id_text"><strong>Text:</strong></label>
+                {{ form.text }} <!-- Text area input -->
+            </div>
+
+            <div class="form-group text-center"> <!-- Centered submit button -->
+                <button type="submit">Submit</button> <!-- Button to submit the form -->
+            </div>
+        </form>
+
+        <!-- Link to go back to the detailed page of the cafe -->
+        <p class="text-center">Go back to the <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}">{{ cafe.name }}</a> page</p>
+    </div>
 {% endblock %}
