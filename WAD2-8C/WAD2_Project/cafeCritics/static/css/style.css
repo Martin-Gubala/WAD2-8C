@@ -100,10 +100,10 @@ footer {
     text-shadow: none;
     max-width: 400px; /* Maximum width to keep forms manageable in size */
     margin: 0 auto; /* Centering forms horizontally */
-    background: #f9f9f9; /* Light grey background to differentiate form from other content */
-    padding: 20px; /* Padding around form elements for spacing */
+    background: rgba(255, 255, 255, 0.95); /* Light grey background to differentiate form from other content */
+    padding: 30px; /* Padding around form elements for spacing */
     border-radius: 10px; /* Rounded corners for aesthetic appeal */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .login-form label, .signup-form label {
@@ -112,15 +112,32 @@ footer {
     font-weight: bold; /* Bold labels for better visibility */
 }
 
-.login-form input, .signup-form input {
-    text-shadow: none ;
-    color: #333; /* Dark grey text for input fields */
-    margin-bottom: 10px; /* Spacing between input fields */
+.login-form input, .login-form select {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.signup-form input,
+.signup-form select {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .signup-form .helptext {
-    color: #333; /* Set help text color to black */
-    text-shadow: none ;
+    display: block;
+    margin-top: -8px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #000000;
+    text-shadow: none;
 }
 
 .btn {
@@ -293,3 +310,33 @@ footer {
   .page-fade-in .btn {
     animation: fadeIn 2s ease-out forwards;
   }
+
+.signup-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.signup-form button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+.login-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
