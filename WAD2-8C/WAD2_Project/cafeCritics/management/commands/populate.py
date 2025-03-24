@@ -12,11 +12,14 @@ class Command(BaseCommand):
         self.populate_reviews()
 
     def populate_users(self):
-        # Create 3 business users
+        # Create 6 business users
         business_users = [
             {'username': 'business1', 'email': 'business1@example.com'},
             {'username': 'business2', 'email': 'business2@example.com'},
             {'username': 'business3', 'email': 'business3@example.com'},
+            {'username': 'business4', 'email': 'business4@example.com'},
+            {'username': 'business5', 'email': 'business5@example.com'},
+            {'username': 'business6', 'email': 'business6@example.com'},
         ]
         for user_data in business_users:
             if not User.objects.filter(username=user_data['username']).exists():
@@ -45,7 +48,7 @@ class Command(BaseCommand):
                 UserProfile.objects.create(user=user, user_type='personal')
 
     def populate_cafes(self):
-        # Get business users in order: assign 2 cafes each to the 3 business users => 6 cafes total.
+        # Get business users: assign 1 cafe to each business user => 6 cafes total.
         business_profiles = list(UserProfile.objects.filter(user_type='business'))
         cafes_data = [
             {'name': 'Cafe Sunrise', 'location': 'Downtown', 'average_rating': 4},
@@ -55,37 +58,31 @@ class Command(BaseCommand):
             {'name': 'The Daily Grind', 'location': 'West End', 'average_rating': 3},
             {'name': 'Bean There', 'location': 'Central District', 'average_rating': 4},
         ]
-        # Distribute cafes among business users (2 cafes per user)
+        # Assign one cafe per business user
         for idx, cafe_data in enumerate(cafes_data):
-            owner_profile = business_profiles[idx // 2]
+            owner_profile = business_profiles[idx]
             cafe = Cafe.objects.create(
                 name=cafe_data['name'],
                 location=cafe_data['location'],
                 owner=owner_profile.user,
                 average_rating=cafe_data['average_rating']
             )
-            # Create 3 drinks for each cafe with extra details in comments.
+            # Create 3 drinks for each cafe
             drinks = [
                 {
                     'name': 'Espresso',
                     'price': 2.00,
                     'rating': random.randint(3, 5),
-                    # Photo URL: http://example.com/espresso.jpg
-                    # Description: A strong, full-bodied coffee shot.
                 },
                 {
                     'name': 'Latte',
                     'price': 3.50,
                     'rating': random.randint(3, 5),
-                    # Photo URL: http://example.com/latte.jpg
-                    # Description: Creamy steamed milk with rich espresso.
                 },
                 {
                     'name': 'Cappuccino',
                     'price': 3.00,
                     'rating': random.randint(3, 5),
-                    # Photo URL: http://example.com/cappuccino.jpg
-                    # Description: A balanced blend of espresso, steamed milk, and foam.
                 },
             ]
             for drink_data in drinks:

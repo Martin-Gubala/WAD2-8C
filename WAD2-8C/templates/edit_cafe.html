@@ -1,11 +1,41 @@
 {% extends 'registration/base_generic.html' %}
-
+{% block title %}Edit Cafe{% endblock %}
 {% block content %}
-    <h2>Edit Cafe</h2>
-    <!-- Form for editing cafe details -->
-    <form method="post"><!-- POST method to securely send data to the server -->
-        {% csrf_token %}<!-- CSRF token to protect against CSRF attacks -->
-        {{ form.as_p }}<!-- Renders the form fields as paragraphs for better readability -->
-        <button type="submit">Submit</button><!-- Button to submit the form, saving changes -->
+<div class="container mt-4">
+    <h2>Edit {{ cafe.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend>Cafe Details</legend>
+            {{ cafe_form.as_p }}
+        </fieldset>
+        <hr>
+        <fieldset class="form-group">
+            <legend>Drinks</legend>
+            {{ drink_formset.management_form }}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in drink_formset %}
+                    <tr>
+                        <!-- Include any hidden fields for each form -->
+                        {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                        {% endfor %}
+                        <td>{{ form.name }}</td>
+                        <td>{{ form.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="btn btn-secondary">Cancel</a>
     </form>
+</div>
 {% endblock %}

@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserUpdateForm
 from django.contrib.auth import logout
+from django.forms import modelformset_factory
 
 # Create your views here.
 # Consolidated signup and register views into one
@@ -22,6 +23,9 @@ def signup_view(request):
             # Save the user and log them in
             user = form.save()
             login(request, user)
+            # Redirect based on user type
+            if user.userprofile.user_type == 'business':
+                return redirect('cafeCritics:cafe_setup')  # Redirect to cafe setup page
             return redirect('cafeCritics:home_page')  # Redirect to the homepage
         else:
             # If the form is invalid, display errors
@@ -64,7 +68,7 @@ def home_view(request):
 def cafes_view(request):
     rating = request.GET.get('rating')  # Get the rating value from the GET request
     if rating:  # Check if a rating was provided
-        cafe_list = Cafe.objects.filter(average_rating=rating)  #Filter cafes by the provided rating
+        cafe_list = Cafe.objects.filter(average_rating=rating)  # Filter cafes by the provided rating
     else:
         cafe_list = Cafe.objects.all()  # No rating provided, show all cafes
 
@@ -79,6 +83,7 @@ def account_settings_view(request):
     return render(request, 'account_settings.html', {'show_search': False})
 # Displays detailed information about a specific cafe, including its drinks and reviews.
 def show_cafe(request, cafe_name_slug):
+    # Ensure the latest data is fetched from the database
     context_dict = {}
     try:
         cafe = Cafe.objects.get(slug=cafe_name_slug)
@@ -142,12 +147,18 @@ def review_view(request, cafe_name_slug):
 # Redirects to the home page upon successful cafe creation.
 def cafe_setup_view(request):
     if request.method == 'POST':
+        # Check if the user already owns a cafe
+        if hasattr(request.user, 'cafe'):
+            messages.error(request, "You already own a cafe. You cannot create another one.")
+            return redirect('cafeCritics:account_settings')
+
         form = CafeSetupForm(request.POST)
         if form.is_valid():
             cafe = form.save(commit=False)
             cafe.owner = request.user
+            cafe.average_rating = 0.0  # Ensure average_rating is set to a default value
             cafe.save()
-            return redirect('home')
+            return redirect('cafeCritics:home_page')  # Use the correct URL pattern name
     else:
         form = CafeSetupForm()
     return render(request, 'registration/cafe_setup.html', {'form': form})
@@ -177,8 +188,9 @@ def profile_view(request, username):
 @login_required
 def account_settings_view(request):
     user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
 
-    #User update form
+    # User update form
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=user)
         password_form = PasswordChangeForm(user, request.POST)
@@ -200,22 +212,71 @@ def account_settings_view(request):
         user_form = UserUpdateForm(instance=user)
         password_form = PasswordChangeForm(user)
 
+    # Fetch cafes owned by the user if they are a business account
+    cafes = Cafe.objects.filter(owner=user) if user_profile.user_type == 'business' else None
+
     return render(request, 'account_settings.html', {
         'user_form': user_form,
         'password_form': password_form,
+        'cafes': cafes,  # Pass cafes to the template
         'show_search': False
     })
 
 # Provides functionality for users to edit and update cafe details, ensuring that only authorized users can make changes.
-@login_required
+@login_required 
 def edit_cafe_view(request, cafe_name_slug):
     cafe = get_object_or_404(Cafe, slug=cafe_name_slug)
+    
+    # Ensure we specify the model, fields, and provide instance_id field
+    DrinkFormSet = modelformset_factory(
+        Drink,
+        fields=('name', 'price'),
+        extra=0,
+    )
+    
     if request.method == 'POST':
-        form = CafeSetupForm(request.POST, instance=cafe)
-        if form.is_valid():
-            form.save()
-            messages.succes(request, "Your cafe details have been updated.")
-            return redirect('cafeCritics:show_cafe', cafe_name_slug=cafe_name_slug)
+        cafe_form = CafeSetupForm(request.POST, instance=cafe)
+        drink_formset = DrinkFormSet(
+            request.POST,
+            queryset=Drink.objects.filter(cafe=cafe),
+            prefix='drinks'
+        )
+        
+        if cafe_form.is_valid() and drink_formset.is_valid():
+            # Save the cafe first
+            updated_cafe = cafe_form.save()
+            
+            # Now save each drink in the formset
+            instances = drink_formset.save(commit=False)
+            for instance in instances:
+                instance.cafe = updated_cafe  # Ensure each drink is linked to this cafe
+                instance.save()
+            
+            # Handle any deleted instances
+            for obj in drink_formset.deleted_objects:
+                obj.delete()
+                
+            messages.success(request, f"Cafe '{updated_cafe.name}' and its drinks have been updated successfully!")
+            
+            # Force a refresh from the database before redirecting
+            updated_cafe.refresh_from_db()
+            return redirect('cafeCritics:show_cafe', cafe_name_slug=updated_cafe.slug)
         else:
-            form = EditCafeForm(instance=cafe)
-        return render(request, 'edit_cafe.html', {'form': form, 'cafe': cafe})
+            errors = []
+            if not cafe_form.is_valid():
+                errors.append(f"Cafe form errors: {cafe_form.errors}")
+            if not drink_formset.is_valid():
+                errors.append(f"Drink formset errors: {drink_formset.errors}")
+            messages.error(request, ". ".join(errors))
+    else:
+        cafe_form = CafeSetupForm(instance=cafe)
+        drink_formset = DrinkFormSet(
+            queryset=Drink.objects.filter(cafe=cafe),
+            prefix='drinks'
+        )
+    
+    return render(request, 'edit_cafe.html', {
+        'cafe_form': cafe_form,
+        'drink_formset': drink_formset,
+        'cafe': cafe
+    })

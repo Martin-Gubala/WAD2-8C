@@ -5,33 +5,48 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Account Settings</h2>
-    <!-- Display success messages if any changes have been successfully made -->
     {% if messages %}
     <div class="alert alert-success">
         {% for message in messages %}
-            {{ message }}<!-- Displays individual messages returned from the server -->
+            {{ message }}
         {% endfor %}
     </div>
     {% endif %}
-    <!-- Form for updating account information -->
     <form method="POST">
-        {% csrf_token %}<!-- CSRF token for protection against CSRF attacks -->
+        {% csrf_token %}
         <fieldset class="form-group">
             <legend>Update Account Information</legend>
             {{ user_form.as_p }}
         </fieldset>
-        <button type="submit" name="update_user" class="btn btn-primary">Update Info</button><!-- Submission button for updating info -->
+        <button type="submit" name="update_user" class="btn btn-primary">Update Info</button>
     </form>
 
     <hr>
-    <!-- Form for changing the user's password -->
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend>Change Password</legend>
             {{ password_form.as_p }}
         </fieldset>
-        <button type="submit" name="change_password" class="btn btn-warning">Change Password</button><!-- Submission button for changing password -->
+        <button type="submit" name="change_password" class="btn btn-warning">Change Password</button>
     </form>
+
+    {% if cafes %}
+    <hr>
+    <h3>Manage Your Cafe</h3>
+    <ul class="list-group">
+        {% for cafe in cafes %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ cafe.name }}
+            <a href="{% url 'cafeCritics:edit_cafe' cafe.slug %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <hr>
+    <h3>Manage Your Cafe</h3>
+    <p>You do not own a cafe yet.</p>
+    <a href="{% url 'cafeCritics:cafe_setup' %}" class="btn btn-success mt-3">Add New Cafe</a>
+    {% endif %}
 </div>
 {% endblock %}

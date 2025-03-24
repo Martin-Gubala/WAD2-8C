@@ -6,7 +6,7 @@ app_name = 'cafeCritics'
 
 urlpatterns = [
     # Home page route
-    path('', home_view, name='home_page'), #Displays the main homepage of the application
+    path('', views.home_view, name='home_page'), #Displays the main homepage of the application
 
     # Display all cafe with filters applied through GET request
     path('cafes/', views.cafes_view, name='cafes'), # List all cafes or filter by ratings
@@ -37,7 +37,7 @@ urlpatterns = [
     path('login/', login_view, name='login'), # User login page
 
     # Cafe setup page for registration users 
-    path('cafe_setup/', cafe_setup_view, name='cafe_setup'), # Allows users to add new cafes to the platform 
+    path('cafe_setup/', views.cafe_setup_view, name='cafe_setup'), # Allows users to add new cafes to the platform 
 
     # Logout route
     path('logout/', views.logout_view, name='logout'),# Logs out the current user and redirects to home page

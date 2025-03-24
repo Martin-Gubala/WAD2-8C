@@ -17,12 +17,20 @@ class UserProfile(models.Model):
 class Cafe(models.Model):
     name = models.CharField(max_length=20) # Name of the cafe
     location = models.CharField(max_length=20) # Physical location of the cafe
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cafes") # User who owns the cafe
-    average_rating = models.IntegerField() # Average rating as an integer 
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cafe") # Ensure one cafe per user
+    average_rating = models.FloatField(default=0.0) # Average rating as a float with a default value
     slug = models.SlugField(unique=True) # URL-friendly slug derived from the cafe name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name) # Auto-generates the slug from the cafe name upon saving
+        if not self.slug:  # Generate slug only if it doesn't exist
+            self.slug = slugify(self.name)
+            # Ensure the slug is unique
+            unique_slug = self.slug
+            num = 1
+            while Cafe.objects.filter(slug=unique_slug).exists():
+                unique_slug = f"{self.slug}-{num}"
+                num += 1
+            self.slug = unique_slug
         super(Cafe, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -49,4 +57,4 @@ class Review(models.Model):
         unique_together = ('user', 'cafe') # Ensures a user can only review a cafe once
 
     def __str__(self):
-        return f"Review by {self.user.username} for {self.cafe.name}" # Formats the string representation of the review 
+        return f"Review by {self.user.username} for {self.cafe.name}" # Formats the string representation of the review
