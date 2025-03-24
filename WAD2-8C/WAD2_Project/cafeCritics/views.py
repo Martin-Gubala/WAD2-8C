@@ -227,11 +227,12 @@ def account_settings_view(request):
 def edit_cafe_view(request, cafe_name_slug):
     cafe = get_object_or_404(Cafe, slug=cafe_name_slug)
     
-    # Ensure we specify the model, fields, and provide instance_id field
+    # Define the DrinkFormSet with the ability to delete drinks
     DrinkFormSet = modelformset_factory(
         Drink,
         fields=('name', 'price'),
         extra=0,
+        can_delete=True  # Allow deletion of drinks
     )
     
     if request.method == 'POST':
@@ -246,13 +247,13 @@ def edit_cafe_view(request, cafe_name_slug):
             # Save the cafe first
             updated_cafe = cafe_form.save()
             
-            # Now save each drink in the formset
+            # Save each drink in the formset
             instances = drink_formset.save(commit=False)
             for instance in instances:
                 instance.cafe = updated_cafe  # Ensure each drink is linked to this cafe
                 instance.save()
             
-            # Handle any deleted instances
+            # Handle any deleted drinks
             for obj in drink_formset.deleted_objects:
                 obj.delete()
                 

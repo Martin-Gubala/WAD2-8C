@@ -1,41 +1,67 @@
 {% extends 'registration/base_generic.html' %}
+{% block body_class %}settings-background{% endblock %}
 {% block title %}Edit Cafe{% endblock %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Edit {{ cafe.name }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend>Cafe Details</legend>
-            {{ cafe_form.as_p }}
-        </fieldset>
-        <hr>
-        <fieldset class="form-group">
-            <legend>Drinks</legend>
-            {{ drink_formset.management_form }}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for form in drink_formset %}
-                    <tr>
-                        <!-- Include any hidden fields for each form -->
-                        {% for hidden in form.hidden_fields %}
-                        {{ hidden }}
-                        {% endfor %}
-                        <td>{{ form.name }}</td>
-                        <td>{{ form.price }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </fieldset>
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-        <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="btn btn-secondary">Cancel</a>
-    </form>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title text-center">Edit {{ cafe.name }}</h2>
+        </div>
+        <div class="card-body edit-cafe-container">
+            <form method="post">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend>Cafe Details</legend>
+                    {{ cafe_form.as_p }}
+                </fieldset>
+                <hr>
+                <fieldset class="form-group">
+                    <legend>Edit Drinks</legend>
+                    {{ drink_formset.management_form }}
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="drink-name">Drink Name</th>
+                                <th class="drink-price">Price</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for form in drink_formset %}
+                            <tr>
+                                <!-- Include hidden fields for each form -->
+                                {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                                {% endfor %}
+                                <td>{{ form.name }}</td>
+                                <td>{{ form.price }}</td>
+                                <td>{{ form.DELETE }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-success btn-sm" onclick="addDrinkRow()">Add Drink</button>
+                </fieldset>
+                <hr>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script>
+    function addDrinkRow() {
+        const tableBody = document.querySelector('table tbody');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td><input type="text" name="drinks-NEW-name" class="form-control" placeholder="Drink Name"></td>
+            <td><input type="number" name="drinks-NEW-price" class="form-control" placeholder="Price"></td>
+            <td><input type="checkbox" disabled></td>
+        `;
+        tableBody.appendChild(newRow);
+    }
+</script>
 {% endblock %}
