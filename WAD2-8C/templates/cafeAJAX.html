@@ -6,6 +6,8 @@
             <div class="button"><span>See Drinks</span></div>
         </div>
         <!-- Link to add a review for the cafe -->
-        <a href="{% url 'cafeCritics:review' cafe.slug %}" class="btn btn-secondary">Add a Review</a>
+        <button type="button" class="review-btn" onclick="window.location.href='{% url 'cafeCritics:review' cafe.slug %}'">
+            <span>Add a Review</span>
+          </button>
     </div>
 </body>

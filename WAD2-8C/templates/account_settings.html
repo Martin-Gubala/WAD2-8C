@@ -3,6 +3,7 @@
 {% block title %}Account Settings{% endblock %}
 
 {% block content %}
+<div class="page-fade-in">
 <div class="container mt-4">
     <h2>Account Settings</h2>
     {% if messages %}
@@ -48,5 +49,6 @@
     <p>You do not own a cafe yet.</p>
     <a href="{% url 'cafeCritics:cafe_setup' %}" class="btn btn-success mt-3">Add New Cafe</a>
     {% endif %}
+</div>
 </div>
 {% endblock %}

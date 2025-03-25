@@ -2,23 +2,6 @@
 {% block title %}All Cafes - Cafe Critics{% endblock %}
 
 {% block content %}
-<div class="container mt-3">
-    <form method="GET" action="" class="form-inline"><!-- Inline form for simple aesthetic and functionality -->
-        <div class="form-group mb-2"><!-- Form group for better form structure and spacing -->
-            <!-- Accessible label for screen readers only, hidden from visual UI -->
-            <label for="ratingFilter" class="sr-only">Filter by Average Rating:</label>
-            <select class="form-control" id="ratingFilter" name="rating"><!-- Dropdown for selecting cafe ratings -->
-                <option value="">Choose a rating</option><!-- Default option prompting user to choose -->
-                <option value="1">1</option><!-- Option for filtering by rating 1 -->
-                <option value="2">2</option><!-- Option for filtering by rating 2 -->
-                <option value="3">3</option><!-- Option for filtering by rating 3 -->
-                <option value="4">4</option><!-- Option for filtering by rating 4 -->
-                <option value="5">5</option><!-- Option for filtering by rating 5 -->
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary mb-2">Filter</button><!-- Button to submit the filter form -->
-    </form>
-</div>
 <!-- Container for displaying all cafes -->
 <div class="container my-5 page-fade-in">
     <div class="page-title-box text-center">
