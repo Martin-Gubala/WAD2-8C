@@ -20,8 +20,10 @@
     </form>
 </div>
 <!-- Container for displaying all cafes -->
-<div class="container my-5">
-    <h2 class="text-center mb-4">All Cafes</h2>
+<div class="container my-5 page-fade-in">
+    <div class="page-title-box text-center">
+        <h2 class="page-title">All Cafes</h2>
+    </div>
     <div class="row row-cols-1 row-cols-md-2 g-4"><!-- Responsive grid layout for displaying cafe cards -->
         {% for cafe in cafes %}<!-- Loop through each cafe passed to the template -->
         <div class="col">
@@ -36,7 +38,9 @@
                         Owner: {{ cafe.owner }}<br> <!-- Cafe owner -->
                         Average Rating: {{ cafe.average_rating }}<br><!-- Cafe average rating -->
                     </p>
-                    <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="btn btn-primary">View Cafe</a><!-- Link to view detailed cafe page -->                
+                    <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="box-button">
+                        <div class="button"><span>View Cafe</span></div><!-- Link to view detailed cafe page --> 
+                    </a>               
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 {% extends 'registration/base_generic.html' %}
 {% block title %}{{ cafe.name }} - Cafe Critics{% endblock %}
 {% block content %}
+<div class="page-fade-in">
 <div class="container my-5">
     <div class="card mb-4">
         <div class="card-header">
@@ -14,8 +15,12 @@
             </ul>
             <div id="menu" class="mb-3"> <!-- Container for the drinks menu actions -->
                 <p class="text-muted menu-description">Click the button below to load the drinks menu.</p><!-- Instructions for loading the drinks menu -->
-                <button type="button" class="btn btn-primary me-2" onclick="loadDoc(drinksurl, myFn1)">See Drinks</button><!-- Button to trigger drinks menu loading -->
-                <a href="{% url 'cafeCritics:review' cafe.slug %}" class="btn btn-secondary">Add a Review</a><!-- Link to add a review for the cafe -->
+                <div class="box-button me-2" onclick="loadDoc(drinksurl, myFn1)" style="display:inline-block;">
+                    <div class="button"><span>See Drinks</span></div><!-- Button to trigger drinks menu loading -->
+                </div>
+                <button type="button" class="review-btn" onclick="window.location.href='{% url 'cafeCritics:review' cafe.slug %}'">
+                    <span>Add a Review</span>
+                  </button><!-- Link to add a review for the cafe -->
             </div>
         </div>
     </div>

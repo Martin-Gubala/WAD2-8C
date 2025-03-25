@@ -1,7 +1,7 @@
 {% extends "registration/base_generic.html" %}
 {% block title %}Search Results{% endblock %}
 {% block content %}
-<div class="container mt-3">
+<div class="container mt-3 page-fade-in">
     <h2>Search Results for "{{ query }}"</h2>
     <!-- Search bar form -->
     <form method="GET" action="{% url 'cafeCritics:search' %}" class="form-inline">
@@ -31,7 +31,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ cafe.name }}</h5>
                     <p class="card-text">{{ cafe.description }}</p>
-                    <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="btn btn-primary">View Cafe</a>
+                    <a href="{% url 'cafeCritics:show_cafe' cafe.slug %}" class="box-button">
+                        <div class="button"><span>View Cafe</span></div>
+                    </a>
                 </div>
             </div>
         </div>

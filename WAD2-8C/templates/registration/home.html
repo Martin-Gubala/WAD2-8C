@@ -7,7 +7,10 @@
     <h1 class="text-center">Cafe Critics</h1> <!-- Main heading of the page -->
     <!-- Button to view all cafes, linking to the cafes page -->
     <div class="text-center mb-4">
-        <a href="{% url 'cafeCritics:cafes' %}" class="btn btn-primary">View All Cafes</a>
+        <!-- This is from Uiverse.io -->
+        <a href="{% url 'cafeCritics:cafes' %}" class="box-button">
+            <div class="button"><span>View All Cafes</span></div>
+        </a>
     </div>
     <!-- Section displaying top rated cafes and drinks -->
     <div class="row row-top-rated">
