@@ -4,7 +4,10 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from cafeCritics.models import UserProfile, Cafe, Drink, Review
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cafeCritics.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WAD2_Project.settings")
+
+import django
+django.setup()
 
 class Command(BaseCommand):
     help = 'Populate the database with sample data'
@@ -69,21 +72,31 @@ class Command(BaseCommand):
                 average_rating=cafe_data['average_rating']
             )
             # Create 3 drinks for each cafe
+            rating1 = random.randint(3, 5)
+            rating2 = random.randint(3, 5)
+            rating3 = random.randint(3, 5)
             drinks = [
                 {
                     'name': 'Espresso',
                     'price': 2.00,
-                    'rating': random.randint(3, 5),
+                    'rating': rating1,
+                    'ratings_total': 60,
+                    'ratings_no': 60/rating1,
+                    
                 },
                 {
                     'name': 'Latte',
                     'price': 3.50,
-                    'rating': random.randint(3, 5),
+                    'rating': rating2,
+                    'ratings_total': 60,
+                    'ratings_no': 60/rating2,
                 },
                 {
                     'name': 'Cappuccino',
                     'price': 3.00,
-                    'rating': random.randint(3, 5),
+                    'rating': rating3,
+                    'ratings_total': 60,
+                    'ratings_no': 60/rating3,
                 },
             ]
             for drink_data in drinks:
@@ -91,7 +104,9 @@ class Command(BaseCommand):
                     name=drink_data['name'],
                     price=drink_data['price'],
                     cafe=cafe,
-                    rating=drink_data['rating']
+                    rating=drink_data['rating'],
+                    ratings_total=drink_data['ratings_total'],
+                    ratings_no=drink_data['ratings_no']
                 )
 
     def populate_reviews(self):

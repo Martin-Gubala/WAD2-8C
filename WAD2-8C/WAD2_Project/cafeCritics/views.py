@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .models import Cafe, Drink, Review, UserProfile
-from .forms import EditCafeForm, ReviewForm, UserRegistrationForm, UserLoginForm, CafeSetupForm
+from .forms import EditCafeForm, ReviewForm, UserRegistrationForm, UserLoginForm, CafeSetupForm, DrinkReviewForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -110,7 +110,19 @@ def show_drinks(request, cafe_name_slug):
     except Cafe.DoesNotExist:
         context_dict['cafe'] = None
         context_dict['drinks'] = None
-
+    if request.method == 'POST':
+        form = DrinkReviewForm(request.POST)
+        if form.is_valid():
+            rating = form.cleaned_data["rating"]
+            drink = form.save(commit=False)
+            drink.cafe = cafe
+            drink.ratings_no += 1
+            drink.ratings_total += rating
+            drink.rating = round(drink.ratings_total/drink.ratings_no, 0)
+            drink.save()
+            return redirect('cafeCritics:show_drinks', cafe_name_slug=cafe_name_slug)
+    else:
+        context_dict['form'] = DrinkReviewForm()
     return render(request, 'drinks.html', context=context_dict)
 
 # AJAX view for dynamically updating cafe details without reloading the page

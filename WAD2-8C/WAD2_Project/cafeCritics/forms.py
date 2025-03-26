@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Review, UserProfile, Cafe
+from .models import Review, UserProfile, Cafe, Drink
 
 # Custom user registration form extending Django's UserCreationForm
 class UserRegistrationForm(UserCreationForm):
@@ -51,8 +51,15 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'text']
+        
 # Form for editing an existing Cafe instance, used in the cafe detail page
 class EditCafeForm(forms.ModelForm):
     class Meta:
         model = Cafe
         fields = ['name', 'location']
+
+# Form for creating or updating a Review instance
+class DrinkReviewForm(forms.ModelForm):
+    class Meta:
+        model = Drink
+        fields = ['rating']

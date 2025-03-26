@@ -1,6 +1,5 @@
 from django.urls import path
-from . import views
-from .views import home_view, signup_view, login_view, cafe_setup_view
+from cafeCritics import views
 
 app_name = 'cafeCritics'
 

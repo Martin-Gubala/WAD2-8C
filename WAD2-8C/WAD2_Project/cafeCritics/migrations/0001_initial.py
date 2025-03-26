@@ -39,6 +39,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=20)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=6)),
                 ('rating', models.IntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], default=1)),
+                ('ratings_total', models.IntegerField()),
+                ('ratings_no', models.IntegerField()),
                 ('cafe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='drinks', to='cafeCritics.Cafe')),
             ],
         ),

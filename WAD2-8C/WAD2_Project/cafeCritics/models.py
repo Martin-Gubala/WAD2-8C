@@ -41,17 +41,20 @@ class Drink(models.Model):
     name = models.CharField(max_length=20) # Name of the drink
     price = models.DecimalField(max_digits=6, decimal_places=2) # Price of the drink as a decimal
     cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE, related_name='drinks') # References the cafe offering the drink
-    rating = models.IntegerField(default=1, choices=[(i, str(i)) for i in range(1, 6)])  # Rating from 1 to 5 for the drink
+    rating = models.IntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], default=1)  # Average rating for the drink
+    ratings_total = models.IntegerField() # Total ratings summed together
+    ratings_no = models.IntegerField() # Number of ratings
 
     def __str__(self):
         return self.name # Returns the name of the drink for display purposes
-
+    
 # Represents a review for a cafe, linked to a user and a cafe
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews") # User who authored the review 
     cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE, related_name="cafe_reviews") # Cafe being reviewed 
     text = models.TextField()
     rating = models.IntegerField(default=1, choices=[(i, str(i)) for i in range(1, 6)])  # Rating provided by the user
+    
 
     class Meta:
         unique_together = ('user', 'cafe') # Ensures a user can only review a cafe once
