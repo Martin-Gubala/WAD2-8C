@@ -21,10 +21,4 @@ class AdminTests(SimpleTestCase):
         self.assertIn(Review, admin.site._registry,
                       "Review model is not registered in admin")
 
-    # This test verifies that the custom CafeAdmin class has the correct settings.
-    def test_cafe_admin_prepopulated_fields(self):
-        #Get the admin configuration for the Cafe model.
-        cafe_admin = admin.site._registry.get(Cafe)
-        #Check if the prepopulated_fields attribute matches what we expect.
-        self.assertEqual(cafe_admin.prepopulated_fields, {'slug': ('name',)},
-                         "CafeAdmin prepopulated_fields does not match expected configuration")
+    

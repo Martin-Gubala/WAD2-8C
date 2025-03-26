@@ -1,5 +1,5 @@
 from django.test import SimpleTestCase
-from cafe.apps import CafeConfig
+from cafeCritics.apps import CafeConfig 
 
 class CafeConfigTest(SimpleTestCase):
     # This test checks if the app configuration for the cafe app is correct
