@@ -1,8 +1,13 @@
 <body>
     <div id="menu">
+        <ul class="list-group list-group-flush mb-3"> <!-- List group for cafe details -->
+            <li class="list-group-item"><strong>Location:</strong> {{ cafe.location }}</li><!-- Displays the location of the cafe -->
+            <li class="list-group-item"><strong>Owner:</strong> {{ cafe.owner }}</li><!-- Displays the owner of the cafe -->
+            <li class="list-group-item"><strong>Average Rating:</strong> {{ cafe.average_rating }}</li><!-- Displays the average rating of the cafe -->
+        </ul>
         <p class="text-muted menu-description">Click the button below to load the drinks menu.</p>
         <!-- Button to trigger drinks menu loading -->
-        <div class="box-button me-2" onclick="loadDoc(drinksurl, myFn1)" style="display:inline-block;">
+        <div class="box-button me-2" onclick="loadDoc(href='{% url 'cafeCritics:show_drinks' cafe.slug %}', myFn1)" style="display:inline-block;">
             <div class="button"><span>See Drinks</span></div>
         </div>
         <!-- Link to add a review for the cafe -->

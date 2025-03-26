@@ -8,14 +8,14 @@
             <h1 class="card-title">{{ cafe.name }}</h1><!-- Displaying the name of the cafe in the card header -->
         </div>
         <div class="card-body">
-            <ul class="list-group list-group-flush mb-3"> <!-- List group for cafe details -->
-                <li class="list-group-item"><strong>Location:</strong> {{ cafe.location }}</li><!-- Displays the location of the cafe -->
-                <li class="list-group-item"><strong>Owner:</strong> {{ cafe.owner }}</li><!-- Displays the owner of the cafe -->
-                <li class="list-group-item"><strong>Average Rating:</strong> {{ cafe.average_rating }}</li><!-- Displays the average rating of the cafe -->
-            </ul>
             <div id="menu" class="mb-3"> <!-- Container for the drinks menu actions -->
+                <ul class="list-group list-group-flush mb-3"> <!-- List group for cafe details -->
+                    <li class="list-group-item"><strong>Location:</strong> {{ cafe.location }}</li><!-- Displays the location of the cafe -->
+                    <li class="list-group-item"><strong>Owner:</strong> {{ cafe.owner }}</li><!-- Displays the owner of the cafe -->
+                    <li class="list-group-item"><strong>Average Rating:</strong> {{ cafe.average_rating }}</li><!-- Displays the average rating of the cafe -->
+                </ul>
                 <p class="text-muted menu-description">Click the button below to load the drinks menu.</p><!-- Instructions for loading the drinks menu -->
-                <div class="box-button me-2" onclick="loadDoc(drinksurl, myFn1)" style="display:inline-block;">
+                <div class="box-button me-2" onclick="loadDoc(href='{% url 'cafeCritics:show_drinks' cafe.slug %}', myFn1)" style="display:inline-block;">
                     <div class="button"><span>See Drinks</span></div><!-- Button to trigger drinks menu loading -->
                 </div>
                 <button type="button" class="review-btn" onclick="window.location.href='{% url 'cafeCritics:review' cafe.slug %}'">
@@ -55,28 +55,4 @@
         </a>
     </div>
 </div>
-{% endblock %}
-
-{% block extra_js %}
-<script type="text/javascript">
-    var drinksurl = "{% url 'cafeCritics:show_drinks' cafe.slug %}";<!-- Variable for the URL to load drinks data -->
-    var cafeurl = "{% url 'cafeCritics:show_cafeAJAX' cafe.slug %}";<!-- Variable for the URL to load cafe details dynamically -->
-    function loadDoc(url, cFunction) {
-        var xhttp = new XMLHttpRequest();<!-- Creating a new XMLHttpRequest object to handle AJAX -->
-        xhttp.onreadystatechange = function() {<!-- Event handler for when the AJAX call state changes -->
-            if (this.readyState == 4 && this.status == 200) {<!-- Check if AJAX call was successful -->
-                cFunction(this);<!-- Calling the callback function to handle the AJAX response -->
-            }
-        };
-        xhttp.open("GET", url, true);<!-- Configuring the AJAX request -->
-        xhttp.send();<!-- Sending the AJAX request -->
-    }
-    function myFn1(xhttp) {
-        document.getElementById("menu").innerHTML = xhttp.responseText;<!-- Updating the HTML of the menu element with the AJAX response -->
-    }
-
-    function myFn2(xhttp) {
-        document.getElementById("cafe").innerHTML = xhttp.responseText;<!-- Updating the HTML of the cafe element with the AJAX response -->
-    }
-</script>
 {% endblock %}

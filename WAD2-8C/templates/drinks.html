@@ -22,7 +22,7 @@
             {% endif %}
             </div>
             <!-- Button to navigate back to the cafe description page -->
-            <div class="box-button me-2" onclick="loadDoc(cafeurl, myFn2)" style="display:inline-block;">
+            <div class="box-button me-2" onclick="loadDoc(href='{% url 'cafeCritics:show_cafeAJAX' cafe.slug %}', myFn2)" style="display:inline-block;">
                 <div class="button"><span>Go Back</span></div>
             </div>
 </body>
