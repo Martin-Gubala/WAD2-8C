@@ -30,7 +30,4 @@ urlpatterns = [
 
     # Direct URL to the home page of the site
     path('home/', home_view, name='home_page'), 
-
-    # Repeated inclusion of cafeCritics URLs under a different path  
-    path('users/', include('cafeCritics.urls', namespace='cafeCritics')),
 ]

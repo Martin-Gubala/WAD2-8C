@@ -34,7 +34,7 @@ urlpatterns = [
 
     # Routes for user registration and login
     path('signup/', views.signup_view, name='signup'), # User registration page
-    path('login/', login_view, name='login'), # User login page
+    path('login/', views.login_view, name='login'), # User login page
 
     # Cafe setup page for registration users 
     path('cafe_setup/', views.cafe_setup_view, name='cafe_setup'), # Allows users to add new cafes to the platform 

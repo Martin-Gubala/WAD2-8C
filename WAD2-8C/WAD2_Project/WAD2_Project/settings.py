@@ -118,4 +118,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'  # Redirect to the homepage after login
+LOGIN_REDIRECT_URL = '/' # Redirect to the homepage after login
