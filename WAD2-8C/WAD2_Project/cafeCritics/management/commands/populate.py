@@ -1,7 +1,10 @@
+import os
 import random
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from cafeCritics.models import UserProfile, Cafe, Drink, Review
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cafeCritics.settings")
 
 class Command(BaseCommand):
     help = 'Populate the database with sample data'
@@ -12,14 +15,13 @@ class Command(BaseCommand):
         self.populate_reviews()
 
     def populate_users(self):
-        # Create 6 business users
+        # Create 5 business users
         business_users = [
             {'username': 'business1', 'email': 'business1@example.com'},
             {'username': 'business2', 'email': 'business2@example.com'},
             {'username': 'business3', 'email': 'business3@example.com'},
             {'username': 'business4', 'email': 'business4@example.com'},
-            {'username': 'business5', 'email': 'business5@example.com'},
-            {'username': 'business6', 'email': 'business6@example.com'},
+            {'username': 'business5', 'email': 'business5@example.com'}
         ]
         for user_data in business_users:
             if not User.objects.filter(username=user_data['username']).exists():
@@ -51,7 +53,6 @@ class Command(BaseCommand):
         # Get business users: assign 1 cafe to each business user => 6 cafes total.
         business_profiles = list(UserProfile.objects.filter(user_type='business'))
         cafes_data = [
-            {'name': 'Cafe Sunrise', 'location': 'Downtown', 'average_rating': 4},
             {'name': 'Moonlight Coffee', 'location': 'Uptown', 'average_rating': 5},
             {'name': 'Starbucks Corner', 'location': 'Midtown', 'average_rating': 4},
             {'name': 'Brewed Awakening', 'location': 'East Side', 'average_rating': 5},
