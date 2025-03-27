@@ -1,0 +1,13 @@
+<!-- ...existing code... -->
+{% for cafe in top_cafes %}
+    <li class="list-group-item d-flex align-items-center">
+        <div>
+            <h5>{{ cafe.name }}</h5>
+            <p>{{ cafe.location }}</p>
+        </div>
+        {% if cafe.photo %}
+            <img src="{{ cafe.photo.url }}" alt="{{ cafe.name }}" class="img-fluid rounded ms-auto" style="max-width: 100px; max-height: 100px;">
+        {% endif %}
+    </li>
+{% endfor %}
+<!-- ...existing code... -->

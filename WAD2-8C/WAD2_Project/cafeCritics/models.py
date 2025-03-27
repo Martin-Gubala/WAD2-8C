@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from django.db import connection
 
 # Create your models here.
 
@@ -46,8 +47,29 @@ class Drink(models.Model):
     ratings_total = models.IntegerField(default=0) # Total ratings summed together
     ratings_no = models.IntegerField(default=0) # Number of ratings
 
+    @staticmethod
+    def ensure_columns_exist():
+        with connection.cursor() as cursor:
+            # Check and add 'ratings_total' column if it doesn't exist
+            cursor.execute("""
+                PRAGMA table_info('cafeCritics_drink');
+            """)
+            columns = [row[1] for row in cursor.fetchall()]
+            if 'ratings_total' not in columns:
+                cursor.execute("""
+                    ALTER TABLE cafeCritics_drink ADD COLUMN ratings_total INTEGER DEFAULT 0;
+                """)
+            # Check and add 'ratings_no' column if it doesn't exist
+            if 'ratings_no' not in columns:
+                cursor.execute("""
+                    ALTER TABLE cafeCritics_drink ADD COLUMN ratings_no INTEGER DEFAULT 0;
+                """)
+
     def __str__(self):
         return self.name # Returns the name of the drink for display purposes
+
+# Call the method to ensure columns exist when the app starts
+Drink.ensure_columns_exist()
     
 # Represents a review for a cafe, linked to a user and a cafe
 class Review(models.Model):

@@ -12,6 +12,9 @@ class Migration(migrations.Migration):
             name='ratings_total',
             field=models.IntegerField(default=0),
         ),
-        # Remove the AlterField operation since ratings_no doesn't exist
-        
+        migrations.AddField(
+            model_name='drink',
+            name='ratings_no',
+            field=models.IntegerField(default=0),
+        ),
     ]
