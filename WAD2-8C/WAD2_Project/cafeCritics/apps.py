@@ -4,4 +4,4 @@ from django.apps import AppConfig
 # This class is used by Django to conifgure app-specific settings
 # and is referenced in the projects settings to register the 'cafe'
 class CafeConfig(AppConfig):
-    name = 'cafe'
+    name = 'cafeCritics'
