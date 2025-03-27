@@ -164,7 +164,7 @@ def cafe_setup_view(request):
             messages.error(request, "You already own a cafe. You cannot create another one.")
             return redirect('cafeCritics:account_settings')
 
-        form = CafeSetupForm(request.POST)
+        form = CafeSetupForm(request.POST, request.FILES)  # Handle file uploads
         if form.is_valid():
             cafe = form.save(commit=False)
             cafe.owner = request.user

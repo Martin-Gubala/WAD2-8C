@@ -22,8 +22,10 @@
                     {% for cafe in top_cafes %}
                         <li class="list-group-item">
                             <h5>{{ cafe.name }}</h5> <!-- Display cafe name -->
-                            <p>{{ cafe.description }}</p> <!-- Display cafe description -->
-                            <img src="{{ cafe.photo.url }}" alt="{{ cafe.name }}" class="img-fluid rounded"> <!-- Display cafe photo -->
+                            <p>{{ cafe.location }}</p> <!-- Display cafe location -->
+                            {% if cafe.photo %}
+                                <img src="{{ cafe.photo.url }}" alt="{{ cafe.name }}" class="img-fluid rounded"> <!-- Display cafe photo if available -->
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>

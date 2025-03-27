@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from cafeCritics.views import home_view  
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # URL pattern for admin site
@@ -30,4 +32,4 @@ urlpatterns = [
 
     # Direct URL to the home page of the site
     path('home/', home_view, name='home_page'), 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

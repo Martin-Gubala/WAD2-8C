@@ -44,7 +44,7 @@ class UserLoginForm(AuthenticationForm):
 class CafeSetupForm(forms.ModelForm):
     class Meta:
         model = Cafe
-        fields = ['name', 'location']
+        fields = ['name', 'location', 'photo']  # Include photo field
 
 # Form for creating or updating a Review instance
 class ReviewForm(forms.ModelForm):
