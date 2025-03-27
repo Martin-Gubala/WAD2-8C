@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .models import Cafe, Drink, Review, UserProfile
-from .forms import EditCafeForm, ReviewForm, UserRegistrationForm, UserLoginForm, CafeSetupForm, DrinkReviewForm
+from .forms import EditCafeForm, ReviewForm, UserRegistrationForm, UserLoginForm, CafeSetupForm, DrinkReviewForm, DrinkFormSet
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -159,21 +159,35 @@ def review_view(request, cafe_name_slug):
 # Redirects to the home page upon successful cafe creation.
 def cafe_setup_view(request):
     if request.method == 'POST':
-        # Check if the user already owns a cafe
+        # Prevent user from creating more than one cafe
         if hasattr(request.user, 'cafe'):
             messages.error(request, "You already own a cafe. You cannot create another one.")
             return redirect('cafeCritics:account_settings')
 
-        form = CafeSetupForm(request.POST, request.FILES)  # Handle file uploads
-        if form.is_valid():
-            cafe = form.save(commit=False)
+        cafe_form = CafeSetupForm(request.POST, request.FILES)
+        # Use a prefix (e.g., 'drinks') so that the formset fields are named accordingly.
+        drink_formset = DrinkFormSet(request.POST, request.FILES, prefix='drinks')
+        
+        if cafe_form.is_valid() and drink_formset.is_valid():
+            cafe = cafe_form.save(commit=False)
             cafe.owner = request.user
-            cafe.average_rating = 0.0  # Ensure average_rating is set to a default value
+            cafe.average_rating = 0.0  # default value
             cafe.save()
-            return redirect('cafeCritics:home_page')  # Use the correct URL pattern name
+            
+            # Loop through each drink form and set the cafe before saving.
+            drinks = drink_formset.save(commit=False)
+            for drink in drinks:
+                drink.cafe = cafe
+                drink.save()
+            return redirect('cafeCritics:home_page')
     else:
-        form = CafeSetupForm()
-    return render(request, 'registration/cafe_setup.html', {'form': form})
+        cafe_form = CafeSetupForm()
+        drink_formset = DrinkFormSet(prefix='drinks')
+    
+    return render(request, 'registration/cafe_setup.html', {
+        'form': cafe_form,
+        'drink_formset': drink_formset,
+    })
 
 # Manages the search function, enabling users to find cafes by their names.
 def search_results(request):

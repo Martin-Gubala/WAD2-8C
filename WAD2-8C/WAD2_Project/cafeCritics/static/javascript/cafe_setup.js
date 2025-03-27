@@ -1,15 +1,22 @@
 document.getElementById('add-drink').addEventListener('click', function() {
+    // Get the drinks container and the TOTAL_FORMS management field.
     const container = document.getElementById('drinks-container');
-    const index = container.children.length - 1; // Get index for the next drink item
-    // HTML for the new drink form, using backticks for multi-line strings
-    const drinkForm = `
+    let totalForms = document.getElementById('id_drinks-TOTAL_FORMS');
+    let index = parseInt(totalForms.value);
+    
+    // Increment TOTAL_FORMS count.
+    totalForms.value = index + 1;
+    
+    // Create new drink form HTML.
+    const newFormHtml = `
         <div class="drink-form">
-            <label for="drinks-${index}-name" class="custom-color">Drink Name:</label>
-            <input type="text" name="drinks-${index}-name" id="drinks-${index}-name">
-            <label for="drinks-${index}-photo" class="custom-color">Drink Photo:</label>
-            <input type="file" name="drinks-${index}-photo" id="drinks-${index}-photo">
+            <label for="id_drinks-${index}-name" class="custom-color">Drink Name:</label>
+            <input type="text" name="drinks-${index}-name" id="id_drinks-${index}-name">
+            <label for="id_drinks-${index}-price" class="custom-color">Price:</label>
+            <input type="text" name="drinks-${index}-price" id="id_drinks-${index}-price">
         </div>
     `;
-    // Insert the new drink form into the container
-    container.insertAdjacentHTML('beforeend', drinkForm);
+    
+    // Append the new drink form HTML to the container.
+    container.insertAdjacentHTML('beforeend', newFormHtml);
 });

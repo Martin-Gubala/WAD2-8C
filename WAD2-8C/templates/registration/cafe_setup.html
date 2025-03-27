@@ -1,47 +1,38 @@
 {% extends 'registration/base_generic.html' %}
 {% load static %}
+{% block body_class %}cafe-setup-page{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cafe_setup.css' %}">
+{% endblock %}
 {% block content %}
-<!-- Page title -->
 <h2 class="cafe-setup-title">Set Up Your Cafe</h2>
-
-<!-- Container for the cafe setup form -->
 <div class="cafe-setup-container">
-
-    <!-- Form for setting up a new cafe -->
     <form method="post" enctype="multipart/form-data" class="cafe-setup-form">
-        {% csrf_token %} <!-- CSRF token for form security -->
-        {{ form.as_p }} <!-- Django form rendered as paragraph elements -->
+        {% csrf_token %}
+        {{ form.as_p }}
 
-        <!-- Field for entering a description of the cafe -->
-        <div class="form-group">
-            <label for="cafe-description" class="label-text">Cafe Description:</label>
-            <textarea name="cafe-description" id="cafe-description" class="input-textarea"></textarea>
-        </div>
-
-        <!-- File input for uploading a cafe photo -->
-        <div class="form-group">
-            <label for="cafe-photo" class="label-text">Cafe Photo:</label>
-            <input type="file" name="cafe-photo" id="cafe-photo" class="input-file">
-        </div>
-
-        <!-- Container for dynamic addition of drink forms -->
+        <!-- Drinks Formset -->
         <div id="drinks-container" class="drinks-container">
             <h3><span class="custom-color">Drinks</span></h3>
+            {{ drink_formset.management_form }}
+            {% for form in drink_formset %}
+                <div class="drink-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
             <button type="button" class="button" id="add-drink">
                 <span class="button__text">Add Drink</span>
                 <span class="button__icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
-                    <line y2="19" y1="5" x2="12" x1="12"></line>
-                    <line y2="12" y1="12" x2="19" x1="5"></line>
-                  </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none">
+                        <line y2="19" y1="5" x2="12" x1="12"></line>
+                        <line y2="12" y1="12" x2="19" x1="5"></line>
+                    </svg>
                 </span>
-              </button>
+            </button>
         </div>
 
-        <!-- Submit button for the form -->
         <button type="submit" class="btn-ready">Submit</button>
     </form>
-
 </div>
 <script src="{% static 'javascript/cafe_setup.js' %}"></script>
 {% endblock %}

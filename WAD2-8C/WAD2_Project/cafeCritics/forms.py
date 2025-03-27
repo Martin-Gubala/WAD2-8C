@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Review, UserProfile, Cafe, Drink
+from django.forms import inlineformset_factory
+
 
 # Custom user registration form extending Django's UserCreationForm
 class UserRegistrationForm(UserCreationForm):
@@ -45,6 +47,21 @@ class CafeSetupForm(forms.ModelForm):
     class Meta:
         model = Cafe
         fields = ['name', 'location', 'photo']  # Include photo field
+
+
+class DrinkForm(forms.ModelForm):
+    class Meta:
+        model = Drink
+        fields = ['name', 'price']
+
+# Create an inline formset for Drink linked to a Cafe.
+DrinkFormSet = inlineformset_factory(
+    Cafe, 
+    Drink, 
+    form=DrinkForm, 
+    extra=1,         
+    can_delete=False
+)
 
 # Form for creating or updating a Review instance
 class ReviewForm(forms.ModelForm):
