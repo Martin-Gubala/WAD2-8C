@@ -53,7 +53,7 @@ class Command(BaseCommand):
                 UserProfile.objects.create(user=user, user_type='personal')
 
     def populate_cafes(self):
-        # Get business users: assign 1 cafe to each business user => 6 cafes total.
+        # Get business users: assign 1 cafe to each business user
         business_profiles = list(UserProfile.objects.filter(user_type='business'))
         cafes_data = [
             {'name': 'Moonlight Coffee', 'location': 'Uptown', 'average_rating': 5, 'photo': 'cafe_photos/moonlight.jpg'},
@@ -62,7 +62,6 @@ class Command(BaseCommand):
             {'name': 'The Daily Grind', 'location': 'West End', 'average_rating': 3, 'photo': 'cafe_photos/dailygrind.jpg'},
             {'name': 'Bean There', 'location': 'Central District', 'average_rating': 4, 'photo': 'cafe_photos/beanthere.jpg'},
         ]
-        # Assign one cafe per business user
         for idx, cafe_data in enumerate(cafes_data):
             owner_profile = business_profiles[idx]
             cafe = Cafe.objects.create(
@@ -73,32 +72,10 @@ class Command(BaseCommand):
                 photo=cafe_data['photo']  # Assign photo
             )
             # Create 3 drinks for each cafe
-            rating1 = random.randint(3, 5)
-            rating2 = random.randint(3, 5)
-            rating3 = random.randint(3, 5)
             drinks = [
-                {
-                    'name': 'Espresso',
-                    'price': 2.00,
-                    'rating': rating1,
-                    'ratings_total': 60,
-                    'ratings_no': 60/rating1,
-                    
-                },
-                {
-                    'name': 'Latte',
-                    'price': 3.50,
-                    'rating': rating2,
-                    'ratings_total': 60,
-                    'ratings_no': 60/rating2,
-                },
-                {
-                    'name': 'Cappuccino',
-                    'price': 3.00,
-                    'rating': rating3,
-                    'ratings_total': 60,
-                    'ratings_no': 60/rating3,
-                },
+                {'name': 'Espresso', 'price': 2.00, 'rating': random.randint(3, 5)},
+                {'name': 'Latte', 'price': 3.50, 'rating': random.randint(3, 5)},
+                {'name': 'Cappuccino', 'price': 3.00, 'rating': random.randint(3, 5)},
             ]
             for drink_data in drinks:
                 Drink.objects.create(
@@ -106,25 +83,26 @@ class Command(BaseCommand):
                     price=drink_data['price'],
                     cafe=cafe,
                     rating=drink_data['rating'],
-                    ratings_total=drink_data['ratings_total'],
-                    ratings_no=drink_data['ratings_no']
+                    ratings_total=drink_data['rating'] * 10,
+                    ratings_no=10
                 )
 
     def populate_reviews(self):
-        import itertools
         # Get all personal users and all cafes
         personal_profiles = list(UserProfile.objects.filter(user_type='personal'))
         cafes = list(Cafe.objects.all())
-        for profile in personal_profiles:
-            # Select 4 unique cafes for this user (avoiding duplicates because of unique_together)
-            if len(cafes) >= 4:
-                selected_cafes = random.sample(cafes, 4)
-            else:
-                selected_cafes = cafes
-            for idx, cafe in enumerate(selected_cafes, start=1):
+        review_texts = [
+            "A delightful experience!",
+            "The coffee was amazing, and the ambiance was perfect.",
+            "Great place to relax and enjoy a cup of coffee.",
+            "The staff was friendly, and the drinks were top-notch.",
+            "Highly recommend this cafe for coffee lovers!",
+        ]
+        for cafe in cafes:
+            for profile in random.sample(personal_profiles, min(3, len(personal_profiles))):  # Assign 3 reviews per cafe
                 Review.objects.create(
                     user=profile.user,
                     cafe=cafe,
-                    text=f"Review {idx} from {profile.user.username} for {cafe.name}. A delightful experience!",
+                    text=random.choice(review_texts),
                     rating=random.randint(3, 5)
                 )
