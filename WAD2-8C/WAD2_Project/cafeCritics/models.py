@@ -20,7 +20,7 @@ class Cafe(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cafe") # Ensure one cafe per user
     average_rating = models.FloatField(default=0.0) # Average rating as a float with a default value
     slug = models.SlugField(unique=True) # URL-friendly slug derived from the cafe name
-    photo = models.ImageField(upload_to='cafe_photos/', blank=True, null=True)  # Add photo field
+    photo = models.ImageField(upload_to='cafe_photos/', blank=True, null=True)  # Save images in 'media/cafe_photos/'
 
     def save(self, *args, **kwargs):
         if not self.slug:  # Generate slug only if it doesn't exist

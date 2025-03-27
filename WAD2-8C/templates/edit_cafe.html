@@ -1,3 +1,4 @@
+<!-- filepath: e:\OneDrive - University of Glasgow\WADS 8C\WAD2-8C\WAD2-8C\templates\edit_cafe.html -->
 {% extends 'registration/base_generic.html' %}
 {% block body_class %}settings-background{% endblock %}
 {% block title %}Edit Cafe{% endblock %}
@@ -8,11 +9,17 @@
             <h2 class="card-title text-center">Edit {{ cafe.name }}</h2>
         </div>
         <div class="card-body edit-cafe-container">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data"> <!-- Add enctype for file uploads -->
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend>Cafe Details</legend>
                     {{ cafe_form.as_p }}
+                    {% if cafe.photo and cafe.photo.url %} <!-- Ensure photo exists and has a valid URL -->
+                        <div class="mb-3">
+                            <label>Current Photo:</label>
+                            <img src="{{ cafe.photo.url }}" alt="{{ cafe.name }}" class="img-fluid rounded"> <!-- Display the photo -->
+                        </div>
+                    {% endif %}
                 </fieldset>
                 <hr>
                 <fieldset class="form-group">

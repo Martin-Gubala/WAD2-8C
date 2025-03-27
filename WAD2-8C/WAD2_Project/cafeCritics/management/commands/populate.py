@@ -56,11 +56,11 @@ class Command(BaseCommand):
         # Get business users: assign 1 cafe to each business user => 6 cafes total.
         business_profiles = list(UserProfile.objects.filter(user_type='business'))
         cafes_data = [
-            {'name': 'Moonlight Coffee', 'location': 'Uptown', 'average_rating': 5},
-            {'name': 'Starbucks Corner', 'location': 'Midtown', 'average_rating': 4},
-            {'name': 'Brewed Awakening', 'location': 'East Side', 'average_rating': 5},
-            {'name': 'The Daily Grind', 'location': 'West End', 'average_rating': 3},
-            {'name': 'Bean There', 'location': 'Central District', 'average_rating': 4},
+            {'name': 'Moonlight Coffee', 'location': 'Uptown', 'average_rating': 5, 'photo': 'cafe_photos/moonlight.jpg'},
+            {'name': 'Starbucks Corner', 'location': 'Midtown', 'average_rating': 4, 'photo': 'cafe_photos/starbucks.jpg'},
+            {'name': 'Brewed Awakening', 'location': 'East Side', 'average_rating': 5, 'photo': 'cafe_photos/brewed.jpg'},
+            {'name': 'The Daily Grind', 'location': 'West End', 'average_rating': 3, 'photo': 'cafe_photos/dailygrind.jpg'},
+            {'name': 'Bean There', 'location': 'Central District', 'average_rating': 4, 'photo': 'cafe_photos/beanthere.jpg'},
         ]
         # Assign one cafe per business user
         for idx, cafe_data in enumerate(cafes_data):
@@ -69,7 +69,8 @@ class Command(BaseCommand):
                 name=cafe_data['name'],
                 location=cafe_data['location'],
                 owner=owner_profile.user,
-                average_rating=cafe_data['average_rating']
+                average_rating=cafe_data['average_rating'],
+                photo=cafe_data['photo']  # Assign photo
             )
             # Create 3 drinks for each cafe
             rating1 = random.randint(3, 5)

@@ -248,7 +248,7 @@ def edit_cafe_view(request, cafe_name_slug):
     )
     
     if request.method == 'POST':
-        cafe_form = CafeSetupForm(request.POST, instance=cafe)
+        cafe_form = CafeSetupForm(request.POST, request.FILES, instance=cafe)  # Include request.FILES for file uploads
         drink_formset = DrinkFormSet(
             request.POST,
             queryset=Drink.objects.filter(cafe=cafe),
