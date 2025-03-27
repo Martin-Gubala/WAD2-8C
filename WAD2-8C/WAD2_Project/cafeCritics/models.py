@@ -42,8 +42,7 @@ class Drink(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2) # Price of the drink as a decimal
     cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE, related_name='drinks') # References the cafe offering the drink
     rating = models.IntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], default=1)  # Average rating for the drink
-    ratings_total = models.IntegerField() # Total ratings summed together
-    ratings_no = models.IntegerField() # Number of ratings
+ 
 
     def __str__(self):
         return self.name # Returns the name of the drink for display purposes

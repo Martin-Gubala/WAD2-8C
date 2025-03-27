@@ -1,14 +1,11 @@
 body, html {
-    font-family: 'Arial', sans-serif; /* Sets the default font for the entire application */
-    background-color: #f8f9fa; /* Light grey background color for easier reading */
-    color: #333; /* Default text color set to dark grey for contrast */
-    position: relative;
-    height: 137%; 
-    margin: 0; 
-    padding: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  font-family: 'Arial', sans-serif; 
+  color: #333; 
+  margin: 0;
+  padding: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* Styling for list items within groups, enhancing visibility and readability */
@@ -22,18 +19,6 @@ body, html {
 .card {
     background-color: rgba(166, 123, 91, 0.8) !important; /* Semi-transparent brown background for card elements */
     border: 1px solid #ffffff !important; /* White border to distinguish cards from the background */
-}
-
-/* Footer styling to anchor at the bottom of the page */
-footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #333; /* Dark background for footer for visual separation */
-    color: white; /* White text for readability */
-    text-align: center;
-    padding: 10px 0;
 }
 
 /* Navbar styling for navigation elements */

@@ -33,7 +33,6 @@
     </form>
 
     {% if user.userprofile.user_type == 'business' %}
-<<<<<<< HEAD
          {% if cafes %}
          <hr>
          <h3>Manage Your Cafe</h3>
@@ -51,25 +50,6 @@
          <p>You do not own a cafe yet.</p>
          <a href="{% url 'cafeCritics:cafe_setup' %}" class="btn btn-success mt-3">Add New Cafe</a>
          {% endif %}
-=======
-        {% if cafes %}
-        <hr>
-        <h3>Manage Your Cafe</h3>
-        <ul class="list-group">
-            {% for cafe in cafes %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ cafe.name }}
-                <a href="{% url 'cafeCritics:edit_cafe' cafe.slug %}" class="btn btn-sm btn-outline-secondary">Edit</a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <hr>
-        <h3>Manage Your Cafe</h3>
-        <p>You do not own a cafe yet.</p>
-        <a href="{% url 'cafeCritics:cafe_setup' %}" class="btn btn-success mt-3">Add New Cafe</a>
-        {% endif %}
->>>>>>> refs/remotes/origin/main
     {% endif %}
 </div>
 </div>
