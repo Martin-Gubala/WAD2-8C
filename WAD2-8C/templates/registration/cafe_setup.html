@@ -1,3 +1,4 @@
+<!-- filepath: e:\OneDrive - University of Glasgow\WADS 8C\WAD2-8C\WAD2_Project\cafeCritics\templates\registration\cafe_setup.html -->
 {% extends 'registration/base_generic.html' %}
 {% load static %}
 {% block content %}
@@ -18,25 +19,8 @@
             <textarea name="cafe-description" id="cafe-description" class="input-textarea"></textarea>
         </div>
 
-        <!-- File input for uploading a cafe photo -->
-        <div class="form-group">
-            <label for="cafe-photo" class="label-text">Cafe Photo:</label>
-            <input type="file" name="cafe-photo" id="cafe-photo" class="input-file">
-        </div>
-
-        <!-- Container for dynamic addition of drink forms -->
-        <div id="drinks-container" class="drinks-container">
-            <h3><span class="custom-color">Drinks</span></h3>
-            <button type="button" class="button" id="add-drink">
-                <span class="button__text">Add Drink</span>
-                <span class="button__icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
-                    <line y2="19" y1="5" x2="12" x1="12"></line>
-                    <line y2="12" y1="12" x2="19" x1="5"></line>
-                  </svg>
-                </span>
-              </button>
-        </div>
+        <!-- Inform users about adding drinks later -->
+        <p class="text-muted">Note: You can add drinks to your cafe in the "Edit Cafe" section after creation.</p>
 
         <!-- Submit button for the form -->
         <button type="submit" class="btn-ready">Submit</button>

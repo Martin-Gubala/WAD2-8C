@@ -12,7 +12,7 @@ function addDrinkRow() {
             <input type="text" name="drinks-${newIndex}-name" class="form-control" placeholder="Drink Name">
         </td>
         <td>
-            <input type="number" name="drinks-${newIndex}-price" class="form-control" placeholder="Price">
+            <input type="number" name="drinks-${newIndex}-price" class="form-control" placeholder="Price" step="any">
         </td>
         <td>
             <button type="button" class="btn btn-danger btn-sm" onclick="deleteNewDrinkRow(this)">Delete</button>
