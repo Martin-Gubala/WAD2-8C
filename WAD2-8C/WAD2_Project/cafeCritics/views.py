@@ -146,13 +146,29 @@ def review_view(request, cafe_name_slug):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.cafe = cafe
-            review.save()
+            # Check if a review by the user for this cafe already exists
+            existing_review = Review.objects.filter(user=request.user, cafe=cafe).first()
+            if existing_review:
+                # Update the existing review
+                existing_review.text = form.cleaned_data['text']
+                existing_review.rating = form.cleaned_data['rating']
+                existing_review.save()
+                messages.success(request, "Your review has been updated.")
+            else:
+                # Create a new review
+                review = form.save(commit=False)
+                review.user = request.user
+                review.cafe = cafe
+                review.save()
+                messages.success(request, "Your review has been submitted.")
             return redirect('cafeCritics:show_cafe', cafe_name_slug=cafe_name_slug)
     else:
-        form = ReviewForm()
+        # Pre-fill the form if a review already exists
+        existing_review = Review.objects.filter(user=request.user, cafe=cafe).first()
+        if existing_review:
+            form = ReviewForm(instance=existing_review)
+        else:
+            form = ReviewForm()
     return render(request, 'review.html', {'form': form, 'cafe': cafe})
 
 # Handles the creation and setup of new cafes by authenticated users. 
