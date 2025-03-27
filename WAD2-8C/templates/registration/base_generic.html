@@ -1,109 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %} <!-- Load static to include CSS and JS files easily -->
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Default Title{% endblock %}</title> <!-- Title block for dynamic page titles -->
-        <!-- Bootstrap CSS for responsive styling -->
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <!-- Bootstrap CSS for responsive styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-        <!-- Bootstrap Icons for enhanced visual elements -->
+    <!-- Bootstrap Icons for enhanced visual elements -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-        <!-- Main stylesheet for custom styles -->
+    <!-- Main stylesheet for custom styles -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'javascript/AJAX.js' %}"></script> <!-- Javascript for running AJAX -->
-    <body class="{% block body_class %}{% endblock %}"> <!-- Body class block for dynamic body classes -->
+    
+    <!-- Block for extra CSS (for pages like cafe_setup) -->
+    {% block extra_css %}{% endblock %}
+    
+    <!-- AJAX JavaScript (if needed) -->
+    <script src="{% static 'javascript/AJAX.js' %}"></script>
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
     <header>
-                <!-- Navigation bar -->
+        <!-- Navigation bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 {% if show_search %}
-<form class="d-flex" method="GET" action="{% url 'cafeCritics:search' %}">
-    <div class="input-container">
-        <input type="text" name="q" class="input" placeholder="search..." />
-        <span class="icon"> 
-            <svg width="19px" height="19px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <path opacity="1" d="M14 5H20" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path opacity="1" d="M14 8H17" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path opacity="1" d="M22 22L20 20" stroke="#000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </g>
-            </svg>
-        </span>
-    </div>
-</form>
-{% endif %}
+                <form class="d-flex" method="GET" action="{% url 'cafeCritics:search' %}">
+                    <div class="input-container">
+                        <input type="text" name="q" class="input" placeholder="search..." />
+                        <span class="icon"> 
+                            <!-- SVG icon here -->
+                        </span>
+                    </div>
+                </form>
+                {% endif %}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Navbar links, dynamically displayed based on authentication status -->
-<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ms-auto">
-      <!-- Home button -->
-      <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:home_page' %}'">
-        <span class="nav-btn-shadow"></span>
-        <span class="nav-btn-edge"></span>
-        <div class="nav-btn-front"><span>Home</span></div>
-      </button>
-      
-      <!-- About button -->
-      <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:about' %}'">
-        <span class="nav-btn-shadow"></span>
-        <span class="nav-btn-edge"></span>
-        <div class="nav-btn-front"><span>About</span></div>
-      </button>
-      
-      {% if user.is_authenticated %}
-        <!-- Logged in info (displayed as text button, non-clickable) -->
-        <button type="button" class="nav-btn" onclick="void(0);">
-          <span class="nav-btn-shadow"></span>
-          <span class="nav-btn-edge"></span>
-          <div class="nav-btn-front"><span>logged in as {{ user.username }}</span></div>
-        </button>
-        <!-- Logout button -->
-        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:logout' %}'">
-          <span class="nav-btn-shadow"></span>
-          <span class="nav-btn-edge"></span>
-          <div class="nav-btn-front"><span>Logout</span></div>
-        </button>
-      {% else %}
-        <!-- Sign Up button -->
-        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:signup' %}'">
-          <span class="nav-btn-shadow"></span>
-          <span class="nav-btn-edge"></span>
-          <div class="nav-btn-front"><span>Sign Up</span></div>
-        </button>
-        <!-- Login button -->
-        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:login' %}'">
-          <span class="nav-btn-shadow"></span>
-          <span class="nav-btn-edge"></span>
-          <div class="nav-btn-front"><span>Login</span></div>
-        </button>
-      {% endif %}
-      
-      <!-- Account Settings button -->
-      <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:account_settings' %}'">
-        <span class="nav-btn-shadow"></span>
-        <span class="nav-btn-edge"></span>
-        <div class="nav-btn-front"><span>Account Settings</span></div>
-      </button>
-      
-      {% if cafe and cafe.owner == user.request %}
-        <!-- Edit Cafe button -->
-        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:edit_cafe' cafe.slug %}'">
-          <span class="nav-btn-shadow"></span>
-          <span class="nav-btn-edge"></span>
-          <div class="nav-btn-front"><span>Edit Cafe</span></div>
-        </button>
-      {% endif %}
-    </div>
-  </div>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <!-- Home button -->
+                        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:home_page' %}'">
+                            <!-- nav-btn structure -->
+                            <div class="nav-btn-front"><span>Home</span></div>
+                        </button>
+                        
+                        <!-- About button -->
+                        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:about' %}'">
+                            <div class="nav-btn-front"><span>About</span></div>
+                        </button>
+
+                        {% if user.is_authenticated %}
+                        <!-- Logged in info (displayed as text button, non-clickable) -->
+                        <button type="button" class="nav-btn" onclick="void(0);">
+                            <div class="nav-btn-front"><span>logged in as {{ user.username }}</span></div>
+                        </button>
+                        <!-- Logout button -->
+                        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:logout' %}'">
+                            <div class="nav-btn-front"><span>Logout</span></div>
+                        </button>
+                        {% else %}
+                        <!-- Sign Up button -->
+                        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:signup' %}'">
+                            <div class="nav-btn-front"><span>Sign Up</span></div>
+                        </button>
+                        <!-- Login button -->
+                        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:login' %}'">
+                            <div class="nav-btn-front"><span>Login</span></div>
+                        </button>
+                        {% endif %}
+
+                        <!-- Account Settings button -->
+                        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:account_settings' %}'">
+                            <div class="nav-btn-front"><span>Account Settings</span></div>
+                        </button>
+
+                        {% if cafe and cafe.owner == user.request %}
+                        <!-- Edit Cafe button -->
+                        <button type="button" class="nav-btn" onclick="window.location.href='{% url 'cafeCritics:edit_cafe' cafe.slug %}'">
+                            <div class="nav-btn-front"><span>Edit Cafe</span></div>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -111,7 +91,8 @@
         {% block content %} <!-- Main content block to be overridden by child templates -->
         {% endblock %}
     </main>
-        <!-- Bootstrap Bundle with Popper for interactive components -->
+
+    <!-- Bootstrap Bundle with Popper for interactive components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_js %} <!-- Block for additional JavaScript -->
     {% endblock %}
