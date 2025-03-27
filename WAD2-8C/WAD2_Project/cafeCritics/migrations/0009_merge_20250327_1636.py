@@ -6,8 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cafeCritics', '0004_auto_20250327_1333'),
-        ('cafeCritics', '0008_remove_drink_vote_count'),
+        ('cafeCritics', '0004_auto_20250327_0004'),  # Update to the correct 0004 migration
     ]
 
     operations = [

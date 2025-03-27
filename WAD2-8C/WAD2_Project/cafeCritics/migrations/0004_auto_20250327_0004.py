@@ -10,9 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='drink',
-            name='ratings_total',
-            field=models.IntegerField(default=0),
-        ),
     ]
