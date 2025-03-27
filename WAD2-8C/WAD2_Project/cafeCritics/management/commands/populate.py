@@ -62,29 +62,16 @@ class Command(BaseCommand):
             {'name': 'The Daily Grind', 'location': 'West End', 'average_rating': 3, 'photo': 'cafe_photos/dailygrind.jpg'},
             {'name': 'Bean There', 'location': 'Central District', 'average_rating': 4, 'photo': 'cafe_photos/beanthere.jpg'},
         ]
+        # Assign one cafe per business user
         for idx, cafe_data in enumerate(cafes_data):
-            owner_profile = business_profiles[idx]
-            cafe = Cafe.objects.create(
-                name=cafe_data['name'],
-                location=cafe_data['location'],
-                owner=owner_profile.user,
-                average_rating=cafe_data['average_rating'],
-                photo=cafe_data['photo']  # Assign photo
-            )
-            # Create 3 drinks for each cafe
-            drinks = [
-                {'name': 'Espresso', 'price': 2.00, 'rating': random.randint(3, 5)},
-                {'name': 'Latte', 'price': 3.50, 'rating': random.randint(3, 5)},
-                {'name': 'Cappuccino', 'price': 3.00, 'rating': random.randint(3, 5)},
-            ]
-            for drink_data in drinks:
-                Drink.objects.create(
-                    name=drink_data['name'],
-                    price=drink_data['price'],
-                    cafe=cafe,
-                    rating=drink_data['rating'],
-                    ratings_total=drink_data['rating'] * 10,
-                    ratings_no=10
+            if idx < len(business_profiles):  # Ensure we don't exceed the number of business users
+                owner_profile = business_profiles[idx]
+                Cafe.objects.create(
+                    name=cafe_data['name'],
+                    location=cafe_data['location'],
+                    owner=owner_profile.user,
+                    average_rating=cafe_data['average_rating'],
+                    photo=cafe_data['photo']  # Assign photo
                 )
 
     def populate_reviews(self):
