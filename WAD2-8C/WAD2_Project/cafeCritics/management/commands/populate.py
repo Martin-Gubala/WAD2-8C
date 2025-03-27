@@ -15,6 +15,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.populate_users()
         self.populate_cafes()
+        self.populate_drinks()  # Add drinks after cafes
         self.populate_reviews()
 
     def populate_users(self):
@@ -72,6 +73,27 @@ class Command(BaseCommand):
                     owner=owner_profile.user,
                     average_rating=cafe_data['average_rating'],
                     photo=cafe_data['photo']  # Assign photo
+                )
+
+    def populate_drinks(self):
+        # Example drinks data
+        drinks_data = [
+            {"name": "Latte", "rating": 4.5, "price": 3.50},
+            {"name": "Espresso", "rating": 4.0, "price": 2.00},
+            {"name": "Cappuccino", "rating": 4.7, "price": 3.75},
+            {"name": "Mocha", "rating": 4.3, "price": 4.00},
+            {"name": "Americano", "rating": 4.2, "price": 2.50},
+        ]
+
+        # Assign drinks to each cafe
+        cafes = list(Cafe.objects.all())
+        for cafe in cafes:
+            for drink_data in random.sample(drinks_data, min(3, len(drinks_data))):  # Assign 3 drinks per cafe
+                Drink.objects.create(
+                    name=drink_data["name"],
+                    cafe=cafe,
+                    rating=drink_data["rating"],
+                    price=drink_data["price"]  # Include price
                 )
 
     def populate_reviews(self):
