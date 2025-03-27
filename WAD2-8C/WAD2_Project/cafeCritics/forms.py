@@ -79,5 +79,5 @@ class EditCafeForm(forms.ModelForm):
 class DrinkReviewForm(forms.ModelForm):
     class Meta:
         model = Drink
-        fields = ['rating']
+        fields = ['name', 'rating']
         
