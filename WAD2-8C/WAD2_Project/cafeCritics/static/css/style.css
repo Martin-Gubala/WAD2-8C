@@ -902,5 +902,23 @@ footer {
     gap: 0.5rem; 
   }
 
+  /* Specific styles for the search results page */
+.search-results-page {
+  background: no-repeat center center fixed; 
+  background-size: cover; 
+  min-height: 100vh; 
+}
+
+.search-results-page h2, 
+.search-results-page p, 
+.search-results-page .card-title, 
+.search-results-page .card-text {
+  color: white; 
+}
+
+.search-results-page .card {
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
   
   
