@@ -1,6 +1,6 @@
 body.cafe-setup-page {
     min-height: 100vh;
-    background: url('/static/css/images/coffee-hero.jpg') center center / cover no-repeat fixed !important;
+    background: url('/static/images/coffee-hero.jpg') center center / cover no-repeat fixed !important;
 
   }
   /* Page Title */

@@ -24,7 +24,7 @@ body, html {
 /* Navbar styling for navigation elements */
 .navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    background: url('/static/css/images/brown.jpg') repeat; /* Repeating brown background pattern */
+    background: url('/static/images/brown.jpg') repeat; /* Repeating brown background pattern */
     background-size: cover;
     background-color: #ffffff; /* Fallback white background color */
 }
@@ -131,7 +131,7 @@ body, html {
 
 /* Additional hero section styling for backgrounds with images */
 .hero {
-    background: url("/WAD2-8C/WAD2_Project/cafeCritics/static/css/images/coffee-hero.jpeg") no-repeat center center; /* Background image for hero section */
+    background: url("/WAD2-8C/WAD2_Project/cafeCritics/static/images/coffee-hero.jpeg") no-repeat center center; /* Background image for hero section */
     background-size: cover; /* Ensures the image covers the entire section */
     height: 60vh; /* Sets height of hero section */
     position: relative; /* Allows for absolute positioning of content within */
@@ -168,7 +168,7 @@ body, html {
 }
 
 body {
-    background-image: url('/static/css/images/coffee-hero.jpg'); /* Background image for body */
+    background-image: url('/static/images/coffee-hero.jpg'); /* Background image for body */
     background-size: cover; /* Ensures the image covers the entire page */
     background-position: center; /* Centers the background image */
     background-repeat: no-repeat; /* Prevents repeating of background image */
@@ -227,14 +227,14 @@ footer {
 
 /* Background styles for various sections with fixed attachment */
 .homepage-background, .login-background, .signup-background, .settings-background {
-    background-image: url('/static/css/images/brown.jpg'); /* Common brown background for various sections */
+    background-image: url('/static/images/brown.jpg'); /* Common brown background for various sections */
     background-size: cover; /* Ensures the image covers the entire section */
     background-position: center; /* Centers the background image */
     background-attachment: fixed; /* Keeps background fixed during scroll */
 }
 
 .about-background {
-    background-image: url('/static/css/images/coffee-hero.jpg'); /* Background image for about section */
+    background-image: url('/static/images/coffee-hero.jpg'); /* Background image for about section */
     background-size: cover; /* Ensures the image covers the entire section */
     background-position: center; /* Centers the background image */
     background-attachment: fixed; /* Keeps background fixed during scroll */
