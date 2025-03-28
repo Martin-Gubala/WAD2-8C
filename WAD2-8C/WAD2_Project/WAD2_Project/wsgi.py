@@ -22,7 +22,7 @@ import os
 import sys
 
 # Set the path to the project root
-path = '/home/Jasoom/WAD2-8C/WAD2-8C/WAD2_Project'
+path = '/home/Jasoom/WAD2-8C/WAD2_Project'
 if path not in sys.path:
     sys.path.append(path)
 
