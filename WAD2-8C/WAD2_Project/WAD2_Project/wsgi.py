@@ -9,9 +9,9 @@ sys.path.append('/home/martingubala/WAD2-8C/WAD2_Project')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'WAD2_Project.settings'
 
 # Activate the virtual environment
-activate_this = '/home/martingubala/.virtualenvs/yourenvname/bin/activate_this.py'
-with open(activate_this) as file_:
-    exec(file_.read(), dict(__file__=activate_this))
+# activate_this = '/home/martingubala/.virtualenvs/yourenvname/bin/activate_this.py'
+# with open(activate_this) as file_:
+#     exec(file_.read(), dict(__file__=activate_this))
 
 # Import and set up the WSGI application
 from django.core.wsgi import get_wsgi_application
